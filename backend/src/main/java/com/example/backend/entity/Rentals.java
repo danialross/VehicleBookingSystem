@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class Rentals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rental_id;
+    private int rental_id;
     private String license_id;
 
     private String plate_id;
@@ -15,11 +15,11 @@ public class Rentals {
     private LocalDate end_date;
 
 
-    public Long getRental_id() {
+    public int getRental_id() {
         return rental_id;
     }
 
-    public void setRental_id(Long rental_id) {
+    public void setRental_id(int rental_id) {
         this.rental_id = rental_id;
     }
 
