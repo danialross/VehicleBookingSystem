@@ -86,6 +86,7 @@ function Navbar({ children }) {
         </div>
       </nav>
       {children}
+      <div className="h-32 w-full bg-green-900"></div>
     </>
   );
 }
