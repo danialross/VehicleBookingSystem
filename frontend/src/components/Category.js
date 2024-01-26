@@ -27,9 +27,12 @@ function Category() {
     <div className="flex py-10 justify-center">
       <div className="flex flex-col py-8 w-4/5 bg-green-900 rounded-xl">
         <div className="flex flex-wrap justify-center">
-          {sections.map((section) => {
+          {sections.map((section, index) => {
             return (
-              <div className=" w-80 flex flex-col justify-between items-center m-4">
+              <div
+                className=" w-80 flex flex-col justify-between items-center m-4"
+                key={index}
+              >
                 <div className="p-6 w-72 text-center font-bebas text-white text-4xl border-2 border-solid border-white rounded-lg whitespace-pre-line">
                   {section.phrase}
                 </div>

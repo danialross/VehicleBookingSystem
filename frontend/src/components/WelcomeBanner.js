@@ -12,16 +12,15 @@ function WelcomeBanner() {
   ];
 
   const cars = [car1, car2, car3, car4];
-
   const randomNumber = Math.floor(Math.random() * 4);
 
   return (
-    <div className="relative pt-12  flex justify-center">
-      <div className="z-0 bg-green-600">
-        <img src={cars[randomNumber]} alt={"Car"} className="z-0 max-w-3xl" />
-      </div>
-      <div className="font-bebas absolute top-12 z-1 text-white text-6xl">
+    <div className=" pt-12 flex flex-col justify-center items-center">
+      <div className="font-bebas text-white text-6xl">
         {phrases[randomNumber]}
+      </div>
+      <div className="bg-green-600">
+        <img src={cars[randomNumber]} alt={"Car"} className="max-w-3xl" />
       </div>
     </div>
   );
