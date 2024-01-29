@@ -14,7 +14,7 @@ function App() {
             </Navbar>
           }
         ></Route>
-        <Route path="/reserve" element={<Navbar></Navbar>}></Route>
+        <Route path="/rent" element={<Navbar></Navbar>}></Route>
         <Route path="/return" element={<Navbar></Navbar>}></Route>
         <Route path="/bookings" element={<Navbar></Navbar>}></Route>
       </Routes>
