@@ -26,7 +26,10 @@ function Category() {
   return (
     <div className="flex py-10 justify-center">
       <div className="flex flex-col py-8 w-4/5 bg-green-900 rounded-xl">
-        <div className="flex flex-wrap justify-center">
+        <div className="p-5 text-center text-5xl text-white font-bebas">
+          Check Out Our Fleet!
+        </div>
+        <div className="flex flex-wrap justify-center ">
           {sections.map((section, index) => {
             return (
               <div
@@ -50,38 +53,6 @@ function Category() {
               </div>
             );
           })}
-          {/* <div className="flex flex-col justify-between items-center">
-            <div className="font-bebas text-white text-4xl pb-10">
-              Master of All Terrains
-            </div>
-            <img
-              className="object-contain max-w-lg"
-              src={truck}
-              alt={"Truck"}
-            />
-            <button
-              type="button"
-              className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-              green
-            </button>
-          </div>
-          <div className="flex flex-col justify-between items-center">
-            <div className="font-bebas text-white text-4xl pb-10">
-              Engineered for Excitement
-            </div>
-            <img
-              className="object-contain max-w-lg"
-              src={sports}
-              alt={"Sports Car"}
-            />
-            <button
-              type="button"
-              className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-              green
-            </button>
-          </div> */}
         </div>
       </div>
     </div>
