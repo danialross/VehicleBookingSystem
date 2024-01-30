@@ -36,17 +36,17 @@ function Category() {
                 className=" w-80 flex flex-col justify-between items-center m-4"
                 key={index}
               >
-                <div className="p-6 w-72 text-center font-bebas text-white text-4xl border-2 border-solid border-white rounded-lg whitespace-pre-line">
+                <div className="p-6 max-w-72 min-w-68 text-center font-bebas text-white text-4xl border-2 border-solid border-white rounded-lg whitespace-pre-line">
                   {section.phrase}
                 </div>
                 <img
-                  className="object-contain max-w-sm p-8"
+                  className="object-contain max-w-sm px-8 py-4"
                   src={section.image}
                   alt={section.category}
                 />
                 <button
                   type="button"
-                  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                 >
                   {`Browse ${section.category}`}
                 </button>
