@@ -26,7 +26,7 @@ function Category() {
   return (
     <div className="flex py-10 justify-center">
       <div className="flex flex-col py-8 w-4/5 bg-green-900 rounded-xl">
-        <div className="p-5 text-center text-5xl text-white font-bebas">
+        <div className="p-5 text-center text-lg sm:text-4xl text-white font-bebas">
           Check Out Our Fleet!
         </div>
         <div className="flex flex-wrap justify-center ">
@@ -36,7 +36,7 @@ function Category() {
                 className=" w-80 flex flex-col justify-between items-center m-4"
                 key={index}
               >
-                <div className="p-6 max-w-72 min-w-68 text-center font-bebas text-white text-4xl border-2 border-solid border-white rounded-lg whitespace-pre-line">
+                <div className="p-6 max-w-72 min-w-68 text-center font-bebas text-white text-lg sm:text-4xl border-2 border-solid border-white rounded-lg whitespace-pre-line">
                   {section.phrase}
                 </div>
                 <img
