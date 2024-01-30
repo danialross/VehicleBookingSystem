@@ -16,10 +16,10 @@ function WelcomeBanner() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-white">
-        <div className="relative max-w-4xl min-w-md flex justify-center">
-          <img src={cars[randomNumber]} alt={"Car"} />
-          <div className="absolute top-1/3 font-bebas text-5xl text-white sm:text-7xl md:text-7xl lg:text-7xl text-nowrap">
+      <div className="pt-10 flex flex-col justify-center items-center px-12">
+        <div className="p-2 relative max-w-4xl min-w-md flex justify-center rounded-2xl bg-green-900">
+          <img src={cars[randomNumber]} alt={"Car"} className="rounded-xl" />
+          <div className="p-4 absolute top-1/3 font-bebas text-3xl text-white sm:text-5xl md:text-6xl lg:text-7xl text-nowrap">
             {phrases[randomNumber]}
           </div>
         </div>
