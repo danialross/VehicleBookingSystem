@@ -1,10 +1,9 @@
 package com.example.backend.controller;
 
-import com.example.backend.entity.Customers;
-import com.example.backend.entity.Rentals;
+import com.example.backend.entity.*;
 import com.example.backend.service.CustomersService;
+import com.example.backend.service.GalleryService;
 import com.example.backend.service.RentalsService;
-import com.example.backend.entity.Cars;
 import com.example.backend.service.CarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +21,9 @@ public class Controller {
     private CarsService carsService;
     @Autowired
     private CustomersService customersService;
+
+    @Autowired
+    private GalleryService galleryService;
 
     @GetMapping("/cars")
     public List<Cars> getCars() {
@@ -43,4 +45,13 @@ public class Controller {
     public List<Customers> getCustomers(){
         return(customersService.getAllCustomers());
     }
+
+    @GetMapping("/image")
+    public List<Gallery> getGallery(){return galleryService.getAll();}
+
+    @GetMapping("/image/{make}")
+    public List<Gallery> getImagesWithMake(@PathVariable String make){return galleryService.getImagesWithMake(make);}
+    @GetMapping("/image/{make}/{model}")
+    public List<Gallery> getImagesWithMakeAndModel(@PathVariable String make,@PathVariable String model){return galleryService.getImagesWithMakeAndModel(make,model);}
+
 }
