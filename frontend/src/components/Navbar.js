@@ -8,12 +8,18 @@ function Navbar({ children }) {
   const toggleDropDown = () => {
     setIsDropDownActive(!isDropDownActive);
   };
+
+  const closeDropDown = () => {
+    setIsDropDownActive(false);
+  };
+
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-green-900">
         <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
           <NavLink
             to="/"
+            onClick={closeDropDown}
             className="flex items-center space-x-3 rtl:space-x-reverse"
           >
             <img
@@ -60,6 +66,7 @@ function Navbar({ children }) {
               <li>
                 <NavLink
                   to="/rent"
+                  onClick={closeDropDown}
                   className={({ isActive }) =>
                     isActive
                       ? "block py-2 px-3 text-green-700 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
@@ -72,6 +79,7 @@ function Navbar({ children }) {
               <li>
                 <NavLink
                   to="/bookings"
+                  onClick={closeDropDown}
                   className={({ isActive }) =>
                     isActive
                       ? "block py-2 px-3 text-green-700 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
@@ -84,6 +92,7 @@ function Navbar({ children }) {
               <li>
                 <NavLink
                   to="/gallery"
+                  onClick={closeDropDown}
                   className={({ isActive }) =>
                     isActive
                       ? "block py-2 px-3 text-green-700 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
