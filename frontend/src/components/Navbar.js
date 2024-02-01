@@ -21,7 +21,7 @@ function Navbar({ children }) {
               className="rounded-lg overflow-hidden h-12"
               alt="Car Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white hover:text-green-500">
+            <span className="font-bebas self-center text-2xl font-semibold whitespace-nowrap dark:text-white hover:text-green-500">
               Rent-A-Ride
             </span>
           </NavLink>
