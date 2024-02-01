@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class Controller {
 
     @Autowired
@@ -46,12 +48,12 @@ public class Controller {
         return(customersService.getAllCustomers());
     }
 
-    @GetMapping("/image")
+    @GetMapping("/images")
     public List<Gallery> getGallery(){return galleryService.getAll();}
 
-    @GetMapping("/image/{make}")
+    @GetMapping("/images/{make}")
     public List<Gallery> getImagesWithMake(@PathVariable String make){return galleryService.getImagesWithMake(make);}
-    @GetMapping("/image/{make}/{model}")
+    @GetMapping("/images/{make}/{model}")
     public List<Gallery> getImagesWithMakeAndModel(@PathVariable String make,@PathVariable String model){return galleryService.getImagesWithMakeAndModel(make,model);}
 
 }
