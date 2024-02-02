@@ -72,7 +72,7 @@ function SearchAndView() {
                 type="text"
                 id="simple-search"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                placeholder="Search"
+                placeholder="Search Car "
                 value={inputField}
                 onChange={handleChange}
                 onKeyDown={handleDefault}
@@ -102,9 +102,13 @@ function SearchAndView() {
             </button>
           </form>
         </div>
-        <div className="text-white font-bebas px-5 pb-10 text-xl">
-          {search.length !== 0 ? "Results for '" + search + "'" : null}
-        </div>
+        {search.length !== 0 ? (
+          <div className="h-10 pb-10 flex justify-start items-center">
+            <div className="text-white text-xl font-bebas">
+              Results for '{search}'
+            </div>
+          </div>
+        ) : null}
         <div className="flex justify-center pb-5 flex-wrap gap-4">
           {cars.map((car) => {
             return (
