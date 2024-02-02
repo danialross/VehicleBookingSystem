@@ -55,8 +55,8 @@ function SearchAndView() {
     }
   };
 
-  const handleEnterDown = (event) => {
-    if (event.key === "Enter") {
+  const handleDefault = (event) => {
+    if (event.key === "Enter" || event.type === "click") {
       event.preventDefault(); // Prevent form submission
       fetchData();
     }
@@ -75,13 +75,13 @@ function SearchAndView() {
                 placeholder="Search"
                 value={inputField}
                 onChange={handleChange}
-                onKeyDown={handleEnterDown}
+                onKeyDown={handleDefault}
               />
             </div>
             <button
               type="button"
               className="p-2.5 ms-2 text-sm font-medium text-white bg-green-700 rounded-lg border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-              onClick={fetchData}
+              onClick={handleDefault}
             >
               <svg
                 className="w-4 h-4"
@@ -137,13 +137,13 @@ function SearchAndView() {
                   </div>
                 ) : (
                   <>
-                    <img
-                      className={
-                        "max-w-80 md:max-w-md object-cover rounded-xl "
-                      }
-                      src={car.image}
-                      alt={"Car"}
-                    />
+                    <div className="w-80 h-52 flex justify-center bg-black rounded-xl border-4 border-white">
+                      <img
+                        className={"w-full object-cover rounded-xl "}
+                        src={car.image}
+                        alt={"Car"}
+                      />
+                    </div>
                     <div className="font-bebas text-white text-center pt-5 pb-3 text-3xl">
                       {car.id.make + " " + car.id.model}
                     </div>
