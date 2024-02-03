@@ -15,7 +15,7 @@ function Navbar({ children }) {
 
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-green-900">
+      <nav className="bg-green-900 dark:bg-green-900 border-b-4 border-white">
         <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
           <NavLink
             to="/"
@@ -27,7 +27,7 @@ function Navbar({ children }) {
               className="rounded-lg overflow-hidden h-12"
               alt="Car Logo"
             />
-            <span className="font-bebas self-center text-2xl font-semibold whitespace-nowrap dark:text-white hover:text-green-500">
+            <span className="font-bebas self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white hover:text-green-500">
               Rent-A-Ride
             </span>
           </NavLink>
@@ -62,15 +62,15 @@ function Navbar({ children }) {
             } w-full md:block md:w-auto`}
             id="navbar-default"
           >
-            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-green-900 dark:border-gray-700">
+            <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-green-900 dark:bg-gray-800 md:dark:bg-green-900 dark:border-gray-700">
               <li>
                 <NavLink
                   to="/rent"
                   onClick={closeDropDown}
                   className={({ isActive }) =>
                     isActive
-                      ? "block py-2 px-3 text-green-700 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
-                      : "block py-2 px-3 text-green-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                      ? "block py-2 px-3 text-green-500 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
+                      : "block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-500 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   }
                 >
                   Rent
@@ -82,8 +82,8 @@ function Navbar({ children }) {
                   onClick={closeDropDown}
                   className={({ isActive }) =>
                     isActive
-                      ? "block py-2 px-3 text-green-700 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
-                      : "block py-2 px-3 text-green-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                      ? "block py-2 px-3 text-green-500 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
+                      : "block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-500 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   }
                 >
                   Bookings
@@ -95,8 +95,8 @@ function Navbar({ children }) {
                   onClick={closeDropDown}
                   className={({ isActive }) =>
                     isActive
-                      ? "block py-2 px-3 text-green-700 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
-                      : "block py-2 px-3 text-green-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                      ? "block py-2 px-3 text-green-500 rounded md:border-0 md:p-0 dark:text-white md:dark:text-green-500"
+                      : "block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-500 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   }
                 >
                   Gallery
