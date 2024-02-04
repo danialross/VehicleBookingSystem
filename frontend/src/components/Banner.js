@@ -1,6 +1,6 @@
 function Banner({ img, text }) {
   return (
-    <div className="relative h-64 w-full flex justify-center items-center overflow-hidden border-b-4  border-white">
+    <div className="relative h-64 sm:h-96 w-full flex justify-center items-center overflow-hidden border-b-4  border-white">
       <img
         className="absolute min-w-full min-h-full object-cover object-bottom"
         src={img}
