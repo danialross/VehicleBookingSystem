@@ -114,7 +114,7 @@ function SearchAndView() {
           {cars.length === 0 ? (
             <div className="max-w-2xl flex flex-col justify-center border-4 border-white rounded-xl pt-10 px-10">
               <div className="text-center text-white font-bebas text-2xl sm:text-4xl">
-                No Result
+                No Results
               </div>
               <img className="object-contain" src={mysteryCar} alt="unknown" />
             </div>
