@@ -17,7 +17,7 @@ function WelcomeBanner() {
   return (
     <>
       <div className="w-full p-4 flex justify-center ">
-        <div className="bg-green-900 font-bebas rounded-lg  text-white text-md sm:text-4xl md:text-4xl p-2 sm:px-4 sm:py-2">
+        <div className="bg-green-900 font-bebas rounded-lg  text-white text-md sm:text-4xl md:text-6xl p-2 sm:px-4 sm:py-2">
           Rentals For Every Adventure
         </div>
       </div>

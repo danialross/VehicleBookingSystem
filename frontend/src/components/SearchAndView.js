@@ -152,7 +152,7 @@ function SearchAndView() {
                     <>
                       <div className="w-80 h-52 flex justify-center bg-black rounded-xl border-4 border-white">
                         <img
-                          className={"w-full object-cover rounded-xl "}
+                          className={"w-full object-cover rounded-lg"}
                           src={car.image}
                           alt={"Car"}
                         />
