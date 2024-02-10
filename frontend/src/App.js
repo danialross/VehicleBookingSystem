@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import GalleryPage from "./pages/GalleryPage";
+import RentPage from "./pages/RentPage";
 function App() {
   return (
     <BrowserRouter>
@@ -15,7 +16,14 @@ function App() {
             </Navbar>
           }
         ></Route>
-        <Route path="/rent" element={<Navbar></Navbar>}></Route>
+        <Route
+          path="/rent"
+          element={
+            <Navbar>
+              <RentPage />
+            </Navbar>
+          }
+        ></Route>
         <Route path="/bookings" element={<Navbar></Navbar>}></Route>
         <Route
           path="/gallery"
