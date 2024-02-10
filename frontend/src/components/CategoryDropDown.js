@@ -37,7 +37,7 @@ function FilterDropDown({ choice, options, setter }) {
 
         <div
           id="dropdownRadioBgHover"
-          className={`z-100 ${
+          className={`z-10 ${
             isDropDownOpen ? "" : "hidden"
           } w-48 absolute top-16 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
         >
