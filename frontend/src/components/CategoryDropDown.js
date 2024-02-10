@@ -13,7 +13,7 @@ function FilterDropDown({ choice, options, setter }) {
         <button
           id="dropdownRadioBgHoverButton"
           data-dropdown-toggle="dropdownRadioBgHover"
-          className="w-36 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          className="w-40 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           type="button"
           onClick={toggleDropdown}
         >
