@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 //category is the default value, options is all the choices the user can select, and setter is the function to pass the choice to the parent function
-function FilterDropDown({ choice, options, setter }) {
+function FilterDropDown({ choice, options, setter, isDisabled }) {
   //by default it is the category
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
@@ -13,9 +13,14 @@ function FilterDropDown({ choice, options, setter }) {
         <button
           id="dropdownRadioBgHoverButton"
           data-dropdown-toggle="dropdownRadioBgHover"
-          className="w-40 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          className={
+            isDisabled
+              ? " w-40 text-white bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center"
+              : "w-40 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          }
           type="button"
           onClick={toggleDropdown}
+          disabled={isDisabled}
         >
           {choice}
           <svg
