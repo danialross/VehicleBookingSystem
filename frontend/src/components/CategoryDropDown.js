@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 //category is the default value, options is all the choices the user can select, and setter is the function to pass the choice to the parent function
-function FilterDropDown({ choice, options, setter, isDisabled }) {
+function FilterDropDown({ choice, options, setter, isDisabled, placeholder }) {
   //by default it is the category
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
-
+  const blankValue = "\u00A0";
   const toggleDropdown = () => setIsDropDownOpen(!isDropDownOpen);
 
   return (
@@ -15,7 +15,7 @@ function FilterDropDown({ choice, options, setter, isDisabled }) {
           data-dropdown-toggle="dropdownRadioBgHover"
           className={
             isDisabled
-              ? " w-40 text-white bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center"
+              ? " w-40 text-gray-500 bg-gray-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center"
               : "w-40 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           }
           type="button"
@@ -55,19 +55,30 @@ function FilterDropDown({ choice, options, setter, isDisabled }) {
                 <li key={item}>
                   <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                     <input
-                      id={`default-radio-${item}`}
+                      id={
+                        item === blankValue
+                          ? `default-radio-${placeholder}-blank`
+                          : `default-radio-${item}`
+                      }
                       type="radio"
                       value={item}
                       name="default-radio-category"
                       className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                       checked={choice === item}
                       onChange={(e) => {
+                        if (e.target.value === blankValue) {
+                          e.target.value = placeholder;
+                        }
                         setter(e.target.value);
                         toggleDropdown();
                       }}
                     />
                     <label
-                      htmlFor={`default-radio-${item}`}
+                      htmlFor={
+                        item === blankValue
+                          ? `default-radio-${placeholder}-blank`
+                          : `default-radio-${item}`
+                      }
                       className="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300"
                     >
                       {item}
