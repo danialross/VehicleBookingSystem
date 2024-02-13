@@ -7,6 +7,14 @@ function FilterDropDown({ choice, options, setter, isDisabled, placeholder }) {
   const blankValue = "\u00A0";
   const toggleDropdown = () => setIsDropDownOpen(!isDropDownOpen);
 
+  const handleSelect = (e) => {
+    if (e.target.value === blankValue) {
+      e.target.value = placeholder;
+    }
+    setter(e.target.value);
+    toggleDropdown();
+  };
+
   return (
     <div className="flex flex-row lg:flex-col">
       <div className="relative flex flex-col items-center justify-center p-2">
@@ -47,6 +55,7 @@ function FilterDropDown({ choice, options, setter, isDisabled, placeholder }) {
           } w-48 absolute top-16 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
         >
           <ul
+            id={placeholder + "-dropdown"}
             className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
             aria-labelledby="dropdownRadioBgHoverButton"
           >
@@ -65,13 +74,7 @@ function FilterDropDown({ choice, options, setter, isDisabled, placeholder }) {
                       name="default-radio-category"
                       className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                       checked={choice === item}
-                      onChange={(e) => {
-                        if (e.target.value === blankValue) {
-                          e.target.value = placeholder;
-                        }
-                        setter(e.target.value);
-                        toggleDropdown();
-                      }}
+                      onChange={handleSelect}
                     />
                     <label
                       htmlFor={

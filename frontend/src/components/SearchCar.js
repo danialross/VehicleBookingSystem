@@ -13,7 +13,7 @@ function SearchCar() {
   //rate
 
   const [selectedMake, setSelectedMake] = useState("Make");
-  const makeRef = useRef(null);
+  const makeRef = useRef(false);
   const make = [
     "\u00A0",
     "Toyota",
@@ -59,10 +59,11 @@ function SearchCar() {
   ];
 
   const [selectedFuel, setSelectedFuel] = useState("Fuel");
-  const fuelRef = useRef(null);
   const fuel = ["\u00A0", "Gasoline", "Hybrid", "Electric"];
 
   const [selectedYear, setSelectedYear] = useState(0);
+  const [onYearFocus, setOnYearFocus] = useState(false);
+  const yearRef = useRef(null);
 
   const [selectedCategory, setSelectedCategory] = useState("Category");
   const categoryRef = useRef(null);
@@ -82,7 +83,12 @@ function SearchCar() {
 
   const handleReset = () => {
     setSelectedFuel("Fuel");
+    setSelectedYear(0);
     setSelectedCategory("Category");
+    setSelectedColor("Color");
+    setSelectedTransmission("Transmission");
+    setMinRate(0);
+    setMaxRate(0);
   };
 
   useEffect(() => {
@@ -99,6 +105,7 @@ function SearchCar() {
   };
 
   const selectAllValue = (e) => {
+    setOnYearFocus(true);
     const element = e.target;
     const value = element.value;
 
@@ -106,10 +113,8 @@ function SearchCar() {
       element.selectionStart === 0 && element.selectionEnd === value.length;
     console.log(isAllSelected);
 
-    if (!isAllSelected) {
+    if (!onYearFocus) {
       element.select();
-    } else {
-      element.focus();
     }
   };
 
@@ -148,6 +153,7 @@ function SearchCar() {
                 className="bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
                 onInput={handleInput(setSelectedYear)}
                 onClick={selectAllValue}
+                onBlur={() => setOnYearFocus(false)}
               />
             </div>
             {/* category */}
