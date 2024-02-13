@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 //category is the default value, options is all the choices the user can select, and setter is the function to pass the choice to the parent function
 function FilterDropDown({ choice, options, setter, isDisabled, placeholder }) {
   //by default it is the category
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const blankValue = "\u00A0";
-  const toggleDropdown = () => setIsDropDownOpen(!isDropDownOpen);
+  const dropDownRef = useRef(null);
+
+  const toggleDropdown = (e) => {
+    if (e) {
+      e.stopPropagation();
+    }
+    setIsDropDownOpen(!isDropDownOpen);
+  };
 
   const handleSelect = (e) => {
     if (e.target.value === blankValue) {
@@ -14,6 +21,27 @@ function FilterDropDown({ choice, options, setter, isDisabled, placeholder }) {
     setter(e.target.value);
     toggleDropdown();
   };
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      console.log("dropid : " + dropDownRef.current.id);
+      console.log("targetid : " + e.target.id);
+
+      if (
+        dropDownRef.current &&
+        !dropDownRef.current.contains(e.target) &&
+        isDropDownOpen
+      ) {
+        toggleDropdown();
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, [isDropDownOpen]);
 
   return (
     <div className="flex flex-row lg:flex-col">
@@ -49,6 +77,7 @@ function FilterDropDown({ choice, options, setter, isDisabled, placeholder }) {
         </button>
 
         <div
+          ref={dropDownRef}
           id="dropdownRadioBgHover"
           className={`z-10 ${
             isDropDownOpen ? "" : "hidden"
