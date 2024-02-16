@@ -13,7 +13,7 @@ function SearchCar() {
   //rate
 
   const [resetMake, setResetMake] = useState(() => {});
-  const [selectedMake, setSelectedMake] = useState("");
+  const [selectedMake, setSelectedMake] = useState("\u00A0");
   const make = [
     "\u00A0",
     "Toyota",
@@ -26,9 +26,10 @@ function SearchCar() {
     "Dodge",
     "Mazda",
   ];
+  const [makeOptions, setMakeOptions] = useState(make);
 
-  const [resetModel, setResetModel] = useState(() => () => {});
-  const [selectedModel, setSelectedModel] = useState("");
+  const [resetModel, setResetModel] = useState(() => {});
+  const [selectedModel, setSelectedModel] = useState("\u00A0");
   const model = [
     "\u00A0",
     "Camry",
@@ -39,43 +40,48 @@ function SearchCar() {
     "Mustang",
     "Rav4",
     "Grand Cherokee",
-    // "F-150",
-    // "Escape",
-    // "Prius",
-    // "Wrangler",
-    // "Equinox",
-    // "Corolla",
-    // "Elantra",
-    // "Avalon",
-    // "Cherokee",
-    // "Model Y",
-    // "Charger",
-    // "Sonata",
-    // "Tacoma",
-    // "CX-5",
-    // "Explorer",
-    // "Camaro",
-    // "Focus",
+    "F-150",
+    "Escape",
+    "Prius",
+    "Wrangler",
+    "Equinox",
+    "Corolla",
+    "Elantra",
+    "Avalon",
+    "Cherokee",
+    "Model Y",
+    "Charger",
+    "Sonata",
+    "Tacoma",
+    "CX-5",
+    "Explorer",
+    "Camaro",
+    "Focus",
   ];
+  const [modelOptions, setModelOptions] = useState(model);
 
-  const [resetFuel, setResetFuel] = useState(() => () => {});
-  const [selectedFuel, setSelectedFuel] = useState("");
+  const [resetFuel, setResetFuel] = useState(() => {});
+  const [selectedFuel, setSelectedFuel] = useState("\u00A0");
   const fuel = ["\u00A0", "Gasoline", "Hybrid", "Electric"];
+  const [fuelOptions, setFuelOptions] = useState(fuel);
 
   const [selectedYear, setSelectedYear] = useState(0);
   const [onYearFocus, setOnYearFocus] = useState(false);
 
-  const [resetCategory, setResetCategory] = useState(() => () => {});
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [resetCategory, setResetCategory] = useState(() => {});
+  const [selectedCategory, setSelectedCategory] = useState("\u00A0");
   const category = ["\u00A0", "Sedan", "Compact", "Truck", "Sport", "SUV"];
+  const [categoryOptions, setCategoryOptions] = useState(category);
 
-  const [resetColor, setResetColor] = useState(() => () => {});
-  const [selectedColor, setSelectedColor] = useState("");
+  const [resetColor, setResetColor] = useState(() => {});
+  const [selectedColor, setSelectedColor] = useState("\u00A0");
   const color = ["\u00A0", "Red", "Green", "green", "Yellow"];
+  const [colorOptions, setColorOptions] = useState(color);
 
-  const [resetTransmission, setResetTransmission] = useState(() => () => {});
-  const [selectedTransmission, setSelectedTransmission] = useState("");
+  const [resetTransmission, setResetTransmission] = useState(() => {});
+  const [selectedTransmission, setSelectedTransmission] = useState("\u00A0");
   const transmission = ["\u00A0", "Automatic", "Manual"];
+  const [transmissionOptions, setTransmissionOptions] = useState(transmission);
 
   const [minRate, setMinRate] = useState(0);
   const [maxRate, setMaxRate] = useState(0);
@@ -94,7 +100,17 @@ function SearchCar() {
 
   useEffect(() => {
     //get options from server
-  }, [selectedColor]);
+  }, [
+    selectedMake,
+    selectedModel,
+    selectedFuel,
+    selectedYear,
+    selectedCategory,
+    selectedColor,
+    selectedTransmission,
+    minRate,
+    maxRate,
+  ]);
 
   const handleInput = (setter) => {
     return (e) => {
@@ -122,8 +138,8 @@ function SearchCar() {
   return (
     <div className="flex justify-center items-center bg-green-700 p-5 sm:p-10">
       <div className="flex flex-col lg:flex-row w-4/5 h-2/3 p-5 rounded-xl bg-green-900 border-white border-4 ">
-        <div className=" flex flex-col items-center justify-start min-w-44 lg:min-w-80 h-full p-5 mb-5 lg:mr-5 lg:mb-0 border-4 rounded-xl border-white bg-green-900 ">
-          <div className="flex justify-center flex-wrap">
+        <div className=" flex flex-col items-center justify-start min-w-44 lg:min-w-80 h-full p-2 mb-5 lg:mr-5 lg:mb-0 border-4 rounded-xl border-white bg-green-900 ">
+          <div className="max-w-5xl lg:max-w-2xl flex justify-center flex-wrap">
             {/* make */}
             <Filter
               options={make}
