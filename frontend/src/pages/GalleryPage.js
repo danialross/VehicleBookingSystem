@@ -1,6 +1,6 @@
 import Banner from "../components/Banner";
 import SearchAndView from "../components/SearchAndView";
-import banner from "../assets/banner1.jpg";
+import banner from "../assets/GalleryBanner.jpg";
 
 function GalleryPage() {
   return (
