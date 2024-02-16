@@ -1,5 +1,5 @@
-import CategoryDropDown from "./CategoryDropDown";
-import { useState, useEffect, useRef } from "react";
+import Filter from "./Filter";
+import { useState, useEffect } from "react";
 
 function SearchCar() {
   //model
@@ -12,8 +12,8 @@ function SearchCar() {
   //transmission
   //rate
 
-  const [selectedMake, setSelectedMake] = useState("Make");
-  const makeRef = useRef(false);
+  const [resetMake, setResetMake] = useState(() => {});
+  const [selectedMake, setSelectedMake] = useState("");
   const make = [
     "\u00A0",
     "Toyota",
@@ -27,8 +27,8 @@ function SearchCar() {
     "Mazda",
   ];
 
-  const [selectedModel, setSelectedModel] = useState("Model");
-  const modelRef = useRef(null);
+  const [resetModel, setResetModel] = useState(() => () => {});
+  const [selectedModel, setSelectedModel] = useState("");
   const model = [
     "\u00A0",
     "Camry",
@@ -39,61 +39,62 @@ function SearchCar() {
     "Mustang",
     "Rav4",
     "Grand Cherokee",
-    "F-150",
-    "Escape",
-    "Prius",
-    "Wrangler",
-    "Equinox",
-    "Corolla",
-    "Elantra",
-    "Avalon",
-    "Cherokee",
-    "Model Y",
-    "Charger",
-    "Sonata",
-    "Tacoma",
-    "CX-5",
-    "Explorer",
-    "Camaro",
-    "Focus",
+    // "F-150",
+    // "Escape",
+    // "Prius",
+    // "Wrangler",
+    // "Equinox",
+    // "Corolla",
+    // "Elantra",
+    // "Avalon",
+    // "Cherokee",
+    // "Model Y",
+    // "Charger",
+    // "Sonata",
+    // "Tacoma",
+    // "CX-5",
+    // "Explorer",
+    // "Camaro",
+    // "Focus",
   ];
 
-  const [selectedFuel, setSelectedFuel] = useState("Fuel");
+  const [resetFuel, setResetFuel] = useState(() => () => {});
+  const [selectedFuel, setSelectedFuel] = useState("");
   const fuel = ["\u00A0", "Gasoline", "Hybrid", "Electric"];
 
   const [selectedYear, setSelectedYear] = useState(0);
   const [onYearFocus, setOnYearFocus] = useState(false);
-  const yearRef = useRef(null);
 
-  const [selectedCategory, setSelectedCategory] = useState("Category");
-  const categoryRef = useRef(null);
+  const [resetCategory, setResetCategory] = useState(() => () => {});
+  const [selectedCategory, setSelectedCategory] = useState("");
   const category = ["\u00A0", "Sedan", "Compact", "Truck", "Sport", "SUV"];
 
-  const [selectedColor, setSelectedColor] = useState("Color");
-  const colorRef = useRef(null);
+  const [resetColor, setResetColor] = useState(() => () => {});
+  const [selectedColor, setSelectedColor] = useState("");
   const color = ["\u00A0", "Red", "Green", "green", "Yellow"];
 
-  const [selectedTransmission, setSelectedTransmission] =
-    useState("Transmission");
-  const transmissionRef = useRef(null);
+  const [resetTransmission, setResetTransmission] = useState(() => () => {});
+  const [selectedTransmission, setSelectedTransmission] = useState("");
   const transmission = ["\u00A0", "Automatic", "Manual"];
 
   const [minRate, setMinRate] = useState(0);
   const [maxRate, setMaxRate] = useState(0);
 
   const handleReset = () => {
-    setSelectedFuel("Fuel");
+    resetMake();
+    resetModel();
+    resetFuel();
     setSelectedYear(0);
-    setSelectedCategory("Category");
-    setSelectedColor("Color");
-    setSelectedTransmission("Transmission");
+    resetCategory();
+    resetColor();
+    resetTransmission();
     setMinRate(0);
     setMaxRate(0);
   };
 
   useEffect(() => {
     //get options from server
-  }, []);
+  }, [selectedColor]);
 
   const handleInput = (setter) => {
     return (e) => {
@@ -119,108 +120,110 @@ function SearchCar() {
   };
 
   return (
-    <div className="flex justify-center items-center bg-green-700 p-5 sm:p-10 ">
+    <div className="flex justify-center items-center bg-green-700 p-5 sm:p-10">
       <div className="flex flex-col lg:flex-row w-4/5 h-2/3 p-5 rounded-xl bg-green-900 border-white border-4 ">
         <div className=" flex flex-col items-center justify-start min-w-44 lg:min-w-80 h-full p-5 mb-5 lg:mr-5 lg:mb-0 border-4 rounded-xl border-white bg-green-900 ">
-          <div className="text-white text-sm p-5">
-            Leave Blank To Search For All
-          </div>
           <div className="flex justify-center flex-wrap">
             {/* make */}
-            <CategoryDropDown
-              choice={selectedMake}
+            <Filter
               options={make}
               setter={setSelectedMake}
-              placeholder={"Make"}
+              placeholder={"make"}
+              resetter={setResetMake}
             />
             {/* model */}
-            <CategoryDropDown
-              choice={selectedModel}
+            <Filter
               options={model}
               setter={setSelectedModel}
-              isDisabled={selectedMake === "Make" ? true : false}
               placeholder={"Model"}
+              resetter={setResetModel}
             />
-            {/* year */}
-            <div className="flex items-center w-44 p-2 ">
-              <label htmlFor="Year" className="text-white mr-4 text-sm">
-                Year
-              </label>
-              <input
-                htmlFor="Year"
-                value={selectedYear}
-                type="text"
-                className="bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                onInput={handleInput(setSelectedYear)}
-                onClick={selectAllValue}
-                onBlur={() => setOnYearFocus(false)}
-              />
-            </div>
             {/* category */}
-            <CategoryDropDown
-              choice={selectedCategory}
+            <Filter
               options={category}
               setter={setSelectedCategory}
               placeholder={"Category"}
+              resetter={setResetCategory}
             />
             {/* fuel */}
-            <CategoryDropDown
-              choice={selectedFuel}
+            <Filter
               options={fuel}
               setter={setSelectedFuel}
               placeholder={"Fuel"}
+              resetter={setResetFuel}
             />
+
             {/* color */}
-            <CategoryDropDown
-              choice={selectedColor}
+            <Filter
               options={color}
               setter={setSelectedColor}
               placeholder={"Color"}
+              resetter={setResetColor}
             />
             {/* transmission */}
-            <CategoryDropDown
-              choice={selectedTransmission}
+            <Filter
               options={transmission}
               setter={setSelectedTransmission}
               placeholder={"Transmission"}
+              resetter={setResetTransmission}
             />
-            {/* rate */}
-            <div className="flex items-center p-2 w-44 ">
-              <label
-                htmlFor="minRate"
-                className="text-white mr-1 text-xs text-center"
-              >
-                Min ($)
-              </label>
-              <input
-                htmlFor="minRate"
-                value={minRate}
-                type="text"
-                className=" bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                onInput={handleInput(setMinRate)}
-                onClick={selectAllValue}
-              />
-              <label className="text-white m-1 text-xs text-center">- </label>
-              <input
-                htmlFor="maxRate"
-                value={maxRate}
-                type="text"
-                className="bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                onInput={handleInput(setMaxRate)}
-                onClick={selectAllValue}
-              />
-              <label
-                htmlFor="maxRate"
-                className="text-white ml-1 text-xs text-center"
-              >
-                Max ($)
-              </label>
-            </div>
+          </div>
+          {/* year */}
+          <div className="flex items-center w-52 p-2 mt-5">
+            <label htmlFor="Year" className="text-white mr-2 text-sm">
+              Year
+            </label>
+            <input
+              htmlFor="Year"
+              value={selectedYear}
+              type="text"
+              className="bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+              onInput={handleInput(setSelectedYear)}
+              onClick={selectAllValue}
+              onBlur={() => setOnYearFocus(false)}
+            />
+          </div>
+          {/* rate */}
+          <div className="flex items-center p-2 w-52 mt-5">
+            <label
+              htmlFor="minRate"
+              className="text-white mr-1 text-sm text-center"
+            >
+              Min ($)
+            </label>
+            <input
+              htmlFor="minRate"
+              value={minRate}
+              type="text"
+              className="bg-gray-50 border border-gray-300 text-sm text-gray-900  rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+              onInput={handleInput(setMinRate)}
+              onClick={selectAllValue}
+            />
+            <label
+              htmlFor="minRate"
+              className="text-white m-1 text-sm text-center"
+            >
+              -
+            </label>
+            <input
+              htmlFor="maxRate"
+              value={maxRate}
+              type="text"
+              className="bg-gray-50 border border-gray-300 text-sm text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+              onInput={handleInput(setMaxRate)}
+              onClick={selectAllValue}
+            />
+            <label
+              htmlFor="maxRate"
+              className="text-white ml-1 text-sm text-center"
+            >
+              Max ($)
+            </label>
           </div>
 
           <button
             type="button"
-            className="mt-2 focus:outline-none text-white bg-gray-700 hover:bg-gray-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700"
+            className="mt-8 focus:outline-none text-white bg-gray-700 hover:bg-gray-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700"
             onClick={handleReset}
           >
             Reset
