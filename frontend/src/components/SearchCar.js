@@ -1,3 +1,4 @@
+import CarCard from "./CarCard";
 import Filter from "./Filter";
 import { useState, useEffect } from "react";
 
@@ -85,6 +86,31 @@ function SearchCar() {
 
   const [minRate, setMinRate] = useState(0);
   const [maxRate, setMaxRate] = useState(0);
+
+  const [searchResult, setSearchResult] = useState([
+    {
+      image:
+        "https://www.gtplanet.net/wp-content/uploads/2023/06/image-3-28.jpg",
+      make: "Toyota",
+      model: "Corolla",
+      fuel: "Gasoline",
+      year: 2023,
+      category: "Hatchback",
+      color: "Red",
+      transmission: "Manual",
+    },
+    {
+      image:
+        "https://www.motortrend.com/uploads/sites/5/2020/01/2020-Honda-Civic-Type-R-front.jpg?fit=around%7C875:492",
+      make: "Honda",
+      model: "Civic",
+      fuel: "Gasoline",
+      year: 2022,
+      category: "Hatchback",
+      color: "White",
+      transmission: "Manual",
+    },
+  ]);
 
   const handleReset = () => {
     resetMake();
@@ -245,7 +271,11 @@ function SearchCar() {
             Reset
           </button>
         </div>
-        <div className="w-full h-60 border-4 rounded-xl border-white bg-green-900"></div>
+        <div className="flex flex-wrap justify-evenly p-5 w-full h-full border-4 rounded-xl border-white bg-green-900">
+          {searchResult.map((car) => (
+            <CarCard car={car} />
+          ))}
+        </div>
       </div>
     </div>
   );
