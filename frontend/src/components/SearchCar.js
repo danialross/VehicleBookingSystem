@@ -98,6 +98,7 @@ function SearchCar() {
       category: "Hatchback",
       color: "Red",
       transmission: "Manual",
+      rate: 20,
     },
     {
       image:
@@ -109,6 +110,7 @@ function SearchCar() {
       category: "Hatchback",
       color: "White",
       transmission: "Manual",
+      rate: 30,
     },
   ]);
 
@@ -273,7 +275,9 @@ function SearchCar() {
         </div>
         <div className="flex flex-wrap justify-evenly p-5 w-full h-full border-4 rounded-xl border-white bg-green-900">
           {searchResult.map((car) => (
-            <CarCard car={car} />
+            <div className="p-2">
+              <CarCard car={car} />
+            </div>
           ))}
         </div>
       </div>
