@@ -1,3 +1,4 @@
+import AccordionItem from "./AccordionItem";
 import CarCard from "./CarCard";
 import Filter from "./Filter";
 import { useState, useEffect } from "react";
@@ -167,115 +168,154 @@ function SearchCar() {
     <div className="flex justify-center items-center bg-green-700 p-5 sm:p-10">
       <div className="flex flex-col lg:flex-row w-4/5 h-2/3 p-5 rounded-xl bg-green-900 border-white border-4 ">
         <div className=" flex flex-col items-center justify-start min-w-44 lg:min-w-80 h-full p-2 mb-5 lg:mr-5 lg:mb-0 border-4 rounded-xl border-white bg-green-900 ">
-          <div className="max-w-5xl lg:max-w-2xl flex justify-center flex-wrap">
-            {/* make */}
-            <Filter
-              options={make}
-              setter={setSelectedMake}
-              placeholder={"make"}
-              resetter={setResetMake}
-            />
-            {/* model */}
-            <Filter
-              options={model}
-              setter={setSelectedModel}
-              placeholder={"Model"}
-              resetter={setResetModel}
-            />
-            {/* category */}
-            <Filter
-              options={category}
-              setter={setSelectedCategory}
-              placeholder={"Category"}
-              resetter={setResetCategory}
-            />
-            {/* fuel */}
-            <Filter
-              options={fuel}
-              setter={setSelectedFuel}
-              placeholder={"Fuel"}
-              resetter={setResetFuel}
-            />
+          <div className="max-w-5xl w-full lg:max-w-2xl flex justify-center flex-wrap ">
+            <div
+              className="w-full -mt-3 "
+              id="accordion-flush"
+              data-accordion="collapse"
+            >
+              {/* make */}
+              <AccordionItem
+                title={"make"}
+                content={
+                  <Filter
+                    options={make}
+                    setter={setSelectedMake}
+                    category={"make"}
+                    resetter={setResetMake}
+                  />
+                }
+              />
+              {/* model */}
+              <AccordionItem
+                title={"model"}
+                content={
+                  <Filter
+                    options={model}
+                    setter={setSelectedModel}
+                    category={"model"}
+                    resetter={setResetModel}
+                  />
+                }
+              />
+              {/* category */}
+              <AccordionItem
+                title={"category"}
+                content={
+                  <Filter
+                    options={category}
+                    setter={setSelectedCategory}
+                    category={"category"}
+                    resetter={setResetCategory}
+                  />
+                }
+              />
+              {/* fuel */}
+              <AccordionItem
+                title={"fuel"}
+                content={
+                  <Filter
+                    options={fuel}
+                    setter={setSelectedFuel}
+                    category={"fuel"}
+                    resetter={setResetFuel}
+                  />
+                }
+              />
 
-            {/* color */}
-            <Filter
-              options={color}
-              setter={setSelectedColor}
-              placeholder={"Color"}
-              resetter={setResetColor}
-            />
-            {/* transmission */}
-            <Filter
-              options={transmission}
-              setter={setSelectedTransmission}
-              placeholder={"Transmission"}
-              resetter={setResetTransmission}
-            />
-          </div>
-          {/* year */}
-          <div className="flex items-center w-52 p-2 mt-5">
-            <label htmlFor="Year" className="text-white mr-2 text-sm">
-              Year
-            </label>
-            <input
-              htmlFor="Year"
-              value={selectedYear}
-              type="text"
-              className="bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-              onInput={handleInput(setSelectedYear)}
-              onClick={selectAllValue}
-              onBlur={() => setOnYearFocus(false)}
-            />
-          </div>
-          {/* rate */}
-          <div className="flex items-center p-2 w-52 mt-5">
-            <label
-              htmlFor="minRate"
-              className="text-white mr-1 text-sm text-center"
-            >
-              Min ($)
-            </label>
-            <input
-              htmlFor="minRate"
-              value={minRate}
-              type="text"
-              className="bg-gray-50 border border-gray-300 text-sm text-gray-900  rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-              onInput={handleInput(setMinRate)}
-              onClick={selectAllValue}
-            />
-            <label
-              htmlFor="minRate"
-              className="text-white m-1 text-sm text-center"
-            >
-              -
-            </label>
-            <input
-              htmlFor="maxRate"
-              value={maxRate}
-              type="text"
-              className="bg-gray-50 border border-gray-300 text-sm text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-              onInput={handleInput(setMaxRate)}
-              onClick={selectAllValue}
-            />
-            <label
-              htmlFor="maxRate"
-              className="text-white ml-1 text-sm text-center"
-            >
-              Max ($)
-            </label>
-          </div>
+              {/* color */}
+              <AccordionItem
+                title={"color"}
+                content={
+                  <Filter
+                    options={color}
+                    setter={setSelectedColor}
+                    placeholder={"color"}
+                    resetter={setResetColor}
+                  />
+                }
+              />
+              {/* transmission */}
+              <AccordionItem
+                title={"transmission"}
+                content={
+                  <Filter
+                    options={transmission}
+                    setter={setSelectedTransmission}
+                    placeholder={"transmission"}
+                    resetter={setResetTransmission}
+                  />
+                }
+              />
 
-          <button
-            type="button"
-            className="mt-8 focus:outline-none text-white bg-gray-700 hover:bg-gray-800  font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-600 dark:hover:bg-gray-700"
-            onClick={handleReset}
-          >
-            Reset
-          </button>
+              {/* year */}
+              <AccordionItem
+                title={"year"}
+                content={
+                  <div className="flex items-center w-52 py-3">
+                    <label htmlFor="Year" className="text-white mr-2 text-sm">
+                      Year
+                    </label>
+                    <input
+                      htmlFor="Year"
+                      value={selectedYear}
+                      type="text"
+                      className="bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                      onInput={handleInput(setSelectedYear)}
+                      onClick={selectAllValue}
+                      onBlur={() => setOnYearFocus(false)}
+                    />
+                  </div>
+                }
+              />
+              {/* rate */}
+              <AccordionItem
+                title={"price"}
+                content={
+                  <div className="flex items-center w-52 py-3">
+                    <label
+                      htmlFor="minRate"
+                      className="text-white mr-1 text-sm text-center"
+                    >
+                      Min ($)
+                    </label>
+                    <input
+                      htmlFor="minRate"
+                      value={minRate}
+                      type="text"
+                      className="bg-gray-50 border border-gray-300 text-sm text-gray-900  rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                      onInput={handleInput(setMinRate)}
+                      onClick={selectAllValue}
+                    />
+                    <label
+                      htmlFor="minRate"
+                      className="text-white m-1 text-sm text-center"
+                    >
+                      -
+                    </label>
+                    <input
+                      htmlFor="maxRate"
+                      value={maxRate}
+                      type="text"
+                      className="bg-gray-50 border border-gray-300 text-sm text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                      onInput={handleInput(setMaxRate)}
+                      onClick={selectAllValue}
+                    />
+                    <label
+                      htmlFor="maxRate"
+                      className="text-white ml-1 text-sm text-center"
+                    >
+                      Max ($)
+                    </label>
+                  </div>
+                }
+              />
+            </div>
+          </div>
         </div>
         <div className="flex flex-wrap justify-evenly p-5 w-full h-full border-4 rounded-xl border-white bg-green-900">
           {searchResult.map((car) => (
-            <div className="p-2">
+            <div key={car.model} className="p-2">
               <CarCard car={car} />
             </div>
           ))}
