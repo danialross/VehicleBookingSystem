@@ -49,8 +49,8 @@ function BookingCard({ bookingData }) {
             {isDetailsOpened ? "Less" : "Details"}
           </button>
         </div>
-        <div className="text-xl">Pick Up : {bookingData.rental.start}</div>
-        <div className="text-xl">Drop Off : {bookingData.rental.end}</div>
+        <div className="text-xl">Pick Up : {bookingData.rentals.start}</div>
+        <div className="text-xl">Drop Off : {bookingData.rentals.end}</div>
         <div className="flex justify-center pt-3 w-full">
           <button className="text-white end-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xl px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             Modify

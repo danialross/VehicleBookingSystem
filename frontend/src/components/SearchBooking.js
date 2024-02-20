@@ -6,7 +6,7 @@ function SearchBooking() {
   //booking init to null
   const [bookings, setBookings] = useState([
     {
-      rental: {
+      rentals: {
         id: "1",
         license: "DL012345",
         plate: "ABC123",
