@@ -165,7 +165,7 @@ function SearchCar() {
   };
 
   return (
-    <div className="flex justify-center items-center bg-green-700 p-5 sm:p-10">
+    <div className="flex justify-center items-center p-5 sm:p-10">
       <div className="flex flex-col lg:flex-row w-4/5 h-2/3 p-5 rounded-xl bg-green-900 border-white border-4 ">
         <div className=" flex flex-col items-center justify-start min-w-44 lg:min-w-80 h-full p-2 mb-5 lg:mr-5 lg:mb-0 border-4 rounded-xl border-white bg-green-900 ">
           <div className="max-w-5xl w-full lg:max-w-2xl flex justify-center flex-wrap ">

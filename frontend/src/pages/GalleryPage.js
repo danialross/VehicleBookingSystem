@@ -4,7 +4,7 @@ import banner from "../assets/GalleryBanner.jpg";
 
 function GalleryPage() {
   return (
-    <div className="bg-green-600">
+    <div className="bg-green-700">
       <Banner
         img={banner}
         text={

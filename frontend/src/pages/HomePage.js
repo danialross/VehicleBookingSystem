@@ -3,7 +3,7 @@ import WelcomeBanner from "../components/WelcomeBanner";
 
 function HomePage() {
   return (
-    <div className=" bg-green-600">
+    <div className=" bg-green-700">
       <WelcomeBanner />
       <Category />
     </div>
