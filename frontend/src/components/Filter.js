@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-//placeholder is the category to filter, options is all the choices the user can select, and setter is the function to pass the reset to the parent function
-function FilterDropDown({ category, setter, options, resetter }) {
+//category to filter, options is all the choices the user can select, and setter is the function to pass the reset to the parent function
+function Filter({ category, setter, options, resetter }) {
   const [selected, setSelected] = useState(options[0]);
 
   const handleChange = (e) => {
@@ -12,6 +12,7 @@ function FilterDropDown({ category, setter, options, resetter }) {
   useEffect(() => {
     const reset = () => {
       setSelected(options[0]);
+      setter(options[0]);
     };
 
     resetter(() => reset);
@@ -51,4 +52,4 @@ function FilterDropDown({ category, setter, options, resetter }) {
   );
 }
 
-export default FilterDropDown;
+export default Filter;

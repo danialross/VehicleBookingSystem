@@ -77,7 +77,7 @@ function SearchCar() {
 
   const [resetColor, setResetColor] = useState(() => {});
   const [selectedColor, setSelectedColor] = useState("\u00A0");
-  const color = ["\u00A0", "Red", "Green", "green", "Yellow"];
+  const color = ["\u00A0", "Red", "Green", "Yellow"];
   const [colorOptions, setColorOptions] = useState(color);
 
   const [resetTransmission, setResetTransmission] = useState(() => {});
@@ -179,7 +179,7 @@ function SearchCar() {
                 title={"make"}
                 content={
                   <Filter
-                    options={make}
+                    options={makeOptions}
                     setter={setSelectedMake}
                     category={"make"}
                     resetter={setResetMake}
@@ -191,7 +191,7 @@ function SearchCar() {
                 title={"model"}
                 content={
                   <Filter
-                    options={model}
+                    options={modelOptions}
                     setter={setSelectedModel}
                     category={"model"}
                     resetter={setResetModel}
@@ -203,7 +203,7 @@ function SearchCar() {
                 title={"category"}
                 content={
                   <Filter
-                    options={category}
+                    options={categoryOptions}
                     setter={setSelectedCategory}
                     category={"category"}
                     resetter={setResetCategory}
@@ -215,22 +215,21 @@ function SearchCar() {
                 title={"fuel"}
                 content={
                   <Filter
-                    options={fuel}
+                    options={fuelOptions}
                     setter={setSelectedFuel}
                     category={"fuel"}
                     resetter={setResetFuel}
                   />
                 }
               />
-
               {/* color */}
               <AccordionItem
                 title={"color"}
                 content={
                   <Filter
-                    options={color}
+                    options={colorOptions}
                     setter={setSelectedColor}
-                    placeholder={"color"}
+                    category={"color"}
                     resetter={setResetColor}
                   />
                 }
@@ -240,14 +239,13 @@ function SearchCar() {
                 title={"transmission"}
                 content={
                   <Filter
-                    options={transmission}
+                    options={transmissionOptions}
                     setter={setSelectedTransmission}
-                    placeholder={"transmission"}
+                    category={"transmission"}
                     resetter={setResetTransmission}
                   />
                 }
               />
-
               {/* year */}
               <AccordionItem
                 title={"year"}
@@ -310,6 +308,15 @@ function SearchCar() {
                   </div>
                 }
               />
+              <div className="flex justify-center p-3">
+                <button
+                  type="button"
+                  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                  onClick={handleReset}
+                >
+                  Reset
+                </button>
+              </div>
             </div>
           </div>
         </div>
