@@ -3,6 +3,7 @@ import axios from "axios";
 import BookingCard from "./BookingCard";
 function SearchBooking() {
   const [search, setSearch] = useState("");
+  //booking init to null
   const [bookings, setBookings] = useState([
     {
       rental: {
@@ -65,12 +66,14 @@ function SearchBooking() {
     setSearch(e.target.value);
   };
 
-  const fetchData = () => {
-    // try{
-    //     const bookingData = axios.get(url);
-    // }catch(e){
-    //     //something went wrong
-    // }
+  const fetchData = async () => {
+    try {
+      // const bookingData = axios.get(url);
+    } catch (e) {
+      //something went wrong
+    }
+    //testing
+    // setBookings([]);
   };
 
   return (
@@ -79,7 +82,7 @@ function SearchBooking() {
         <>
           <div className="w-full flex flex-col items-center">
             <div className="w-1/2 min-w-96 px-12 pt-8 pb-12 bg-green-900 rounded-xl">
-              <div className="font-bebas text-white text-2xl">
+              <div className="p-2 font-bebas text-white text-2xl">
                 Result for '{search}'
               </div>
               <button
@@ -105,11 +108,21 @@ function SearchBooking() {
                 </svg>
                 <span className="sr-only">Icon description</span>
               </button>
-              {bookings.map((booking) => {
-                return (
-                  <BookingCard bookingData={booking} key={booking.cars.plate} />
-                );
-              })}
+              {bookings.length !== 0 ? (
+                bookings.map((booking) => {
+                  return (
+                    <BookingCard
+                      bookingData={booking}
+                      key={booking.cars.plate}
+                    />
+                  );
+                })
+              ) : (
+                <div className=" w-full p-4 text-white  font-bebas border-white border-2 rounded-xl bg-green-700">
+                  <p className="text-4xl">No Bookings Found</p>
+                  <p className="text-md">Try A Different License Number</p>
+                </div>
+              )}
             </div>
           </div>
         </>
@@ -151,7 +164,10 @@ function SearchBooking() {
                 value={search}
                 onChange={handleChange}
               />
-              <button className="text-white absolute end-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+              <button
+                className="text-white absolute end-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                onClick={fetchData}
+              >
                 Search
               </button>
             </div>
