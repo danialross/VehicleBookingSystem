@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import mysteryCar from "../assets/mysteryCar.png";
 
 function SearchAndView() {
-  const url = "http://localhost:8080/images";
+  const url = "http://localhost:3001/images";
   const [search, setSearch] = useState("");
   const [inputField, setInputField] = useState("");
   const [cars, setCars] = useState([]);
@@ -42,10 +42,11 @@ function SearchAndView() {
     try {
       //   await delay(5000); // testing for loading bar
       const result = await axios.get(url + criteria);
+      console.log(result);
 
       const initialLoadingStates = {};
       const newCars = result.data.map((car) => {
-        initialLoadingStates[car.id.make + " " + car.id.model] = false;
+        initialLoadingStates[car.make + " " + car.model] = false;
         return car;
       });
       setLoadingStates(initialLoadingStates);
@@ -111,7 +112,7 @@ function SearchAndView() {
         ) : null}
         <div className="flex justify-center pb-5 flex-wrap gap-4">
           {cars.length === 0 ? (
-            <div className="max-w-2xl flex flex-col justify-center border-4 border-white rounded-xl pt-10 px-10">
+            <div className="max-w-2xl flex flex-col justify-center border-4 border-white rounded-xl pt-10 px-10 mb-5 bg-green-900">
               <div className="text-center text-white font-bebas text-2xl sm:text-4xl">
                 No Results
               </div>
@@ -128,7 +129,7 @@ function SearchAndView() {
                     <div className="w-80 h-52 flex justify-center bg-black rounded-xl border-4 border-white">
                       <img
                         className={
-                          loadingStates[car.id.make + " " + car.id.model]
+                          loadingStates[car.make + " " + car.model]
                             ? "w-full object-cover rounded-lg"
                             : "hidden"
                         }
@@ -136,14 +137,14 @@ function SearchAndView() {
                         onLoad={() => {
                           setLoadingStates((prevStates) => ({
                             ...prevStates,
-                            [car.id.make + " " + car.id.model]: true,
+                            [car.make + " " + car.model]: true,
                           }));
                         }}
                         alt={"Car"}
                       />
                       <div
                         className={
-                          loadingStates[car.id.make + " " + car.id.model]
+                          loadingStates[car.make + " " + car.model]
                             ? "hidden"
                             : "flex justify-center items-center"
                         }
@@ -151,7 +152,7 @@ function SearchAndView() {
                         <svg
                           aria-hidden="true"
                           className={
-                            loadingStates[car.id.make + " " + car.id.model]
+                            loadingStates[car.make + " " + car.model]
                               ? "hidden"
                               : "inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-green-500"
                           }
@@ -172,7 +173,7 @@ function SearchAndView() {
                     </div>
 
                     <div className="font-bebas text-white text-center pt-5 pb-3 text-3xl">
-                      {car.id.make + " " + car.id.model}
+                      {car.make + " " + car.model}
                     </div>
                   </>
                 </div>
