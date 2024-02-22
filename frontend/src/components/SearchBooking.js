@@ -68,7 +68,8 @@ function SearchBooking() {
 
   const fetchData = async () => {
     try {
-      const bookingData = axios.get(url + "/" + s);
+      const bookingData = await axios.get(url + "/" + search);
+      console.log(bookingData);
     } catch (e) {
       //something went wrong
     }

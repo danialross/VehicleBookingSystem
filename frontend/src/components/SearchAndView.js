@@ -30,18 +30,38 @@ function SearchAndView() {
 
   const fetchData = async (isInitLoad) => {
     let criteria = "";
+    //model at the back make in front
+    let flippedCriteria = "";
+    const query = inputField.trim();
 
     if (!isInitLoad) {
       //using search bar
       if (validateSearch() === false) {
         return;
       }
-      criteria = "/" + inputField.replace(" ", "/");
+
+      if (query.includes(" ")) {
+        criteria = "?make=" + query.replace(" ", "&model=");
+        flippedCriteria = "?model=" + query.replace(" ", "&make=");
+      } else {
+        criteria = "?make=" + query;
+        flippedCriteria = "?model=" + query;
+      }
     }
 
     try {
       //   await delay(5000); // testing for loading bar
-      const result = await axios.get(url + criteria);
+      const regularRequest = await axios.get(url + criteria);
+      const flippedRequest = await axios.get(url + flippedCriteria);
+
+      let result = [];
+
+      if (regularRequest.data.length >= flippedRequest.data.length) {
+        result = regularRequest;
+      } else {
+        result = flippedRequest;
+      }
+
       console.log(result);
 
       const initialLoadingStates = {};
