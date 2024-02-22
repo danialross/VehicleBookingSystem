@@ -29,20 +29,20 @@ function CarCard({ car }) {
             <h1 className="mb-2 text-2xl underline font-bold tracking-tight text-gray-900 dark:text-white">
               Specifications
             </h1>
-            <p class="mb-3 text-gray-700 dark:text-gray-400">
+            <p className="mb-3 text-gray-700 dark:text-gray-400">
               <span className="text-white">Fuel : </span>
               {car.fuel}
             </p>
 
-            <p class="mb-3  text-gray-700 dark:text-gray-400">
+            <p className="mb-3  text-gray-700 dark:text-gray-400">
               <span className="text-white">Body : </span>
               {car.category}
             </p>
-            <p class="mb-3 text-gray-700 dark:text-gray-400">
+            <p className="mb-3 text-gray-700 dark:text-gray-400">
               <span className="text-white">Color : </span>
               {car.color}
             </p>
-            <p class="mb-3  text-gray-700 dark:text-gray-400">
+            <p className="mb-3  text-gray-700 dark:text-gray-400">
               <span className="text-white">Transmission : </span>
               {car.transmission}
             </p>
