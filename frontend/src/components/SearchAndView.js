@@ -29,8 +29,6 @@ function SearchAndView() {
   //   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); // testing for loading bar
 
   const handleLoad = (car) => {
-    console.log(loadingStates);
-
     if (loadingStates[car.make + " " + car.model] === false) {
       setLoadingStates((prevStates) => ({
         ...prevStates,

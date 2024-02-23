@@ -2,8 +2,19 @@ class BookingsController < ApplicationController
 
   def getBookings
     license_id = params[:license_id]
-    @rentals = Rental.where(license_id:license_id)
-    render json: @rentals
+    rentals = Rental.where(license_id:license_id)
+
+    car_plates = rentals.pluck(:plate_id)
+    cars = Car.where(plate_id:car_plates)
+
+    makesAndModels = cars.pluck(:make,:model)
+    images = []
+    makesAndModels.each do |makeAndModel|
+      make,model = makeAndModel
+      images.concat(Image.where(make:make,model:model))
+    end
+
+    render json: {rentals:rentals,cars:cars,images:images}
   end
 
   def getPictures
