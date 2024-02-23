@@ -28,10 +28,21 @@ function SearchAndView() {
 
   //   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms)); // testing for loading bar
 
+  const handleLoad = (car) => {
+    console.log(loadingStates);
+
+    if (loadingStates[car.make + " " + car.model] === false) {
+      setLoadingStates((prevStates) => ({
+        ...prevStates,
+        [car.make + " " + car.model]: true,
+      }));
+    }
+  };
+
   const fetchData = async (isInitLoad) => {
-    let criteria = "";
+    let makeQuery = "";
     //model at the back make in front
-    let flippedCriteria = "";
+    let modelQuery = "";
     const query = inputField.trim();
 
     if (!isInitLoad) {
@@ -40,26 +51,21 @@ function SearchAndView() {
         return;
       }
 
-      if (query.includes(" ")) {
-        criteria = "?make=" + query.replace(" ", "&model=");
-        flippedCriteria = "?model=" + query.replace(" ", "&make=");
-      } else {
-        criteria = "?make=" + query;
-        flippedCriteria = "?model=" + query;
-      }
+      makeQuery = "?make=" + query;
+      modelQuery = "?model=" + query;
     }
 
     try {
       //   await delay(5000); // testing for loading bar
-      const regularRequest = await axios.get(url + criteria);
-      const flippedRequest = await axios.get(url + flippedCriteria);
+      const makeRequest = await axios.get(url + makeQuery);
+      const modelRequest = await axios.get(url + modelQuery);
 
       let result = [];
 
-      if (regularRequest.data.length >= flippedRequest.data.length) {
-        result = regularRequest;
+      if (makeRequest.data.length >= modelRequest.data.length) {
+        result = makeRequest;
       } else {
-        result = flippedRequest;
+        result = modelRequest;
       }
 
       console.log(result);
@@ -93,7 +99,7 @@ function SearchAndView() {
                 type="text"
                 id="simple-search"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                placeholder="Search Car "
+                placeholder="Search Make or Model"
                 value={inputField}
                 onChange={handleChange}
                 onKeyDown={handleDefault}
@@ -154,11 +160,11 @@ function SearchAndView() {
                             : "hidden"
                         }
                         src={car.image}
-                        onLoad={() => {
-                          setLoadingStates((prevStates) => ({
-                            ...prevStates,
-                            [car.make + " " + car.model]: true,
-                          }));
+                        onLoad={() => handleLoad(car)}
+                        ref={(imgElement) => {
+                          if (imgElement && imgElement.complete) {
+                            handleLoad(car);
+                          }
                         }}
                         alt={"Car"}
                       />
