@@ -70,11 +70,11 @@ function SearchBooking() {
     try {
       const bookingData = await axios.get(url + "/" + search);
       console.log(bookingData);
+      setBookings(bookingData);
     } catch (e) {
       //something went wrong
     }
     //testing
-    // setBookings([]);
   };
 
   return (
