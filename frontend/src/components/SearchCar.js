@@ -2,6 +2,7 @@ import AccordionItem from "./AccordionItem";
 import CarCard from "./CarCard";
 import Filter from "./Filter";
 import { useState, useEffect } from "react";
+import mysteryCar from "../assets/mysteryCar.png";
 
 function SearchCar() {
   //model
@@ -89,30 +90,30 @@ function SearchCar() {
   const [maxRate, setMaxRate] = useState(0);
 
   const [searchResult, setSearchResult] = useState([
-    {
-      image:
-        "https://www.gtplanet.net/wp-content/uploads/2023/06/image-3-28.jpg",
-      make: "Toyota",
-      model: "Corolla",
-      fuel: "Gasoline",
-      year: 2023,
-      category: "Hatchback",
-      color: "Red",
-      transmission: "Manual",
-      rate: 20,
-    },
-    {
-      image:
-        "https://www.motortrend.com/uploads/sites/5/2020/01/2020-Honda-Civic-Type-R-front.jpg?fit=around%7C875:492",
-      make: "Honda",
-      model: "Civic",
-      fuel: "Gasoline",
-      year: 2022,
-      category: "Hatchback",
-      color: "White",
-      transmission: "Manual",
-      rate: 30,
-    },
+    // {
+    //   image:
+    //     "https://www.gtplanet.net/wp-content/uploads/2023/06/image-3-28.jpg",
+    //   make: "Toyota",
+    //   model: "Corolla",
+    //   fuel: "Gasoline",
+    //   year: 2023,
+    //   category: "Hatchback",
+    //   color: "Red",
+    //   transmission: "Manual",
+    //   rate: 20,
+    // },
+    // {
+    //   image:
+    //     "https://www.motortrend.com/uploads/sites/5/2020/01/2020-Honda-Civic-Type-R-front.jpg?fit=around%7C875:492",
+    //   make: "Honda",
+    //   model: "Civic",
+    //   fuel: "Gasoline",
+    //   year: 2022,
+    //   category: "Hatchback",
+    //   color: "White",
+    //   transmission: "Manual",
+    //   rate: 30,
+    // },
   ]);
 
   const handleReset = () => {
@@ -321,11 +322,19 @@ function SearchCar() {
           </div>
         </div>
         <div className="flex flex-wrap justify-evenly p-5 w-full h-full border-4 rounded-xl border-white bg-green-900">
-          {searchResult.map((car) => (
-            <div key={car.model} className="p-2">
-              <CarCard car={car} />
+          {searchResult.length !== 0 ? (
+            searchResult.map((car) => (
+              <div key={car.model} className="p-2">
+                <CarCard car={car} />
+              </div>
+            ))
+          ) : (
+            <div className=" flex flex-col text-white font-bebas items-center max-w-sm rounded-xl bg-green-700 ">
+              <img src={mysteryCar} alt="missing car" />
+
+              <div className="text-4xl pb-10 -mt-8 ">No Results Found</div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
