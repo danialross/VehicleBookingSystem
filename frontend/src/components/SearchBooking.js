@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import BookingCard from "./BookingCard";
 function SearchBooking() {
-  const url = "localhost:3001/bookings";
+  const url = "http://localhost:3001/bookings";
   const [search, setSearch] = useState("");
   //booking init to null
   const [bookings, setBookings] = useState(null);
@@ -68,13 +68,14 @@ function SearchBooking() {
 
   const fetchData = async () => {
     try {
-      const bookingData = await axios.get(url + "/" + search);
-      console.log(bookingData);
-      setBookings(bookingData);
+      // search should be the drivers license
+      const result = await axios.get(url + "/" + search);
+      console.log(result.data.bookings);
+      setBookings(result.data.bookings);
     } catch (e) {
+      console.error({ error: e });
       //something went wrong
     }
-    //testing
   };
 
   return (
@@ -112,10 +113,7 @@ function SearchBooking() {
               {bookings.length !== 0 ? (
                 bookings.map((booking) => {
                   return (
-                    <BookingCard
-                      bookingData={booking}
-                      key={booking.cars.plate}
-                    />
+                    <BookingCard booking={booking} key={booking.plate_id} />
                   );
                 })
               ) : (
