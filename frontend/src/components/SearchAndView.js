@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import mysteryCar from "../assets/mysteryCar.png";
 
 function SearchAndView() {
-  const url = "http://localhost:3001/images";
   const [search, setSearch] = useState("");
   const [inputField, setInputField] = useState("");
   const [cars, setCars] = useState([]);
@@ -38,6 +37,7 @@ function SearchAndView() {
   };
 
   const fetchData = async (isInitLoad) => {
+    const url = "http://localhost:3001/images";
     let makeQuery = "";
     //model at the back make in front
     let modelQuery = "";

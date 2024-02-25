@@ -3,6 +3,7 @@ import CarCard from "./CarCard";
 import Filter from "./Filter";
 import { useState, useEffect } from "react";
 import mysteryCar from "../assets/mysteryCar.png";
+import axios from "axios";
 
 function SearchCar() {
   //model
@@ -68,7 +69,8 @@ function SearchCar() {
   const fuel = ["\u00A0", "Gasoline", "Hybrid", "Electric"];
   const [fuelOptions, setFuelOptions] = useState(fuel);
 
-  const [selectedYear, setSelectedYear] = useState(0);
+  const [minYear, setMinYear] = useState(0);
+  const [maxYear, setMaxYear] = useState(0);
   const [onYearFocus, setOnYearFocus] = useState(false);
 
   const [resetCategory, setResetCategory] = useState(() => {});
@@ -120,7 +122,8 @@ function SearchCar() {
     resetMake();
     resetModel();
     resetFuel();
-    setSelectedYear(0);
+    setMinYear(0);
+    setMaxYear(0);
     resetCategory();
     resetColor();
     resetTransmission();
@@ -134,7 +137,8 @@ function SearchCar() {
     selectedMake,
     selectedModel,
     selectedFuel,
-    selectedYear,
+    minYear,
+    maxYear,
     selectedCategory,
     selectedColor,
     selectedTransmission,
@@ -252,18 +256,40 @@ function SearchCar() {
                 title={"year"}
                 content={
                   <div className="flex items-center w-52 py-3">
-                    <label htmlFor="Year" className="text-white mr-2 text-sm">
-                      Year
+                    <label
+                      htmlFor="minRate"
+                      className="text-white mr-1 text-xs text-center"
+                    >
+                      Min (Year)
                     </label>
                     <input
-                      htmlFor="Year"
-                      value={selectedYear}
+                      htmlFor="minYear"
+                      value={minYear}
                       type="text"
-                      className="bg-gray-50 border border-gray-300 text-sm text-gray-900 text-md rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                      onInput={handleInput(setSelectedYear)}
+                      className="bg-gray-50 border border-gray-300 text-xs text-gray-900  rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                      onInput={handleInput(setMinYear)}
                       onClick={selectAllValue}
-                      onBlur={() => setOnYearFocus(false)}
                     />
+                    <label
+                      htmlFor="minYear"
+                      className="text-white m-1 text-sm text-center"
+                    >
+                      -
+                    </label>
+                    <input
+                      htmlFor="maxYear"
+                      value={maxYear}
+                      type="text"
+                      className="bg-gray-50 border border-gray-300 text-xs text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                      onInput={handleInput(setMaxYear)}
+                      onClick={selectAllValue}
+                    />
+                    <label
+                      htmlFor="maxYear"
+                      className="text-white ml-1 text-xs text-center"
+                    >
+                      Max (Year)
+                    </label>
                   </div>
                 }
               />
