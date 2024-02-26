@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9639ca7d-a019-4133-9d4e-61bf97714e38" name="Changes" comment="" />
+    <list default="true" id="9639ca7d-a019-4133-9d4e-61bf97714e38" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/CarCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/CarCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/SearchCar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/SearchCar.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

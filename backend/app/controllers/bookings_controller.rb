@@ -12,6 +12,33 @@ class BookingsController < ApplicationController
 
   end
 
+  def searchRentalCars
+
+  @cars = Car.all
+  @cars = @cars.where(make:params[:make]) if params[:make].present?
+  @cars = @cars.where(model:params[:model]) if params[:model].present?
+  @cars = @cars.where(fuel:params[:fuel]) if params[:fuel].present?
+  @cars = @cars.where(category:params[:category]) if params[:category].present?
+  @cars = @cars.where(color:params[:color]) if params[:color].present?
+  @cars = @cars.where(transmission:params[:transmission]) if params[:transmission].present?
+  @cars = @cars.where(make:params[:make]) if params[:make].present?
+
+
+  if params[:minYear].present? && params[:maxYear].present? && params[:minYear] != params[:maxYear]
+    @cars = @cars.where(year: params[:minYear]..params[:maxYear])
+  end
+
+  if params[:minRate].present? && params[:maxRate].present? && params[:minRate] != params[:maxRate]
+    @cars = @cars.where(rate: params[:minRate]..params[:maxRate])
+  end
+
+  @cars = @cars.joins("INNER JOIN images ON cars.make = images.make AND cars.model = images.model")
+    .select("cars.*,images.image")
+
+  render json:{cars:@cars}
+
+  end
+
   def getPictures
     images_query = Image.all
 
