@@ -13,8 +13,12 @@ function CarCard({ car }) {
   const toggleDetails = () => setIsDetailsOpened(!isDetailsOpened);
 
   return (
-    <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
-      <img className="rounded-t-lg" src={car.image} alt="car" />
+    <div className="bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+      <img
+        className="w-96 h-48 rounded-t-lg object-cover"
+        src={car.image}
+        alt="car"
+      />
 
       <div className="p-5">
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

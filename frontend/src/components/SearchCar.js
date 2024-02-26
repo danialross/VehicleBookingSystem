@@ -15,59 +15,17 @@ function SearchCar() {
   //color
   //transmission
   //rate
-
   const [resetMake, setResetMake] = useState(() => {});
   const [selectedMake, setSelectedMake] = useState("\u00A0");
-  const make = [
-    "\u00A0",
-    "Toyota",
-    "Honda",
-    "Chevrolet",
-    "Tesla",
-    "Ford",
-    "Jeep",
-    "Hyundai",
-    "Dodge",
-    "Mazda",
-  ];
-  const [makeOptions, setMakeOptions] = useState(make);
+  const [makeOptions, setMakeOptions] = useState([]);
 
   const [resetModel, setResetModel] = useState(() => {});
   const [selectedModel, setSelectedModel] = useState("\u00A0");
-  const model = [
-    "\u00A0",
-    "Camry",
-    "Civic",
-    "Silverado",
-    "Model 3",
-    "Accord",
-    "Mustang",
-    "Rav4",
-    "Grand Cherokee",
-    "F-150",
-    "Escape",
-    "Prius",
-    "Wrangler",
-    "Equinox",
-    "Corolla",
-    "Elantra",
-    "Avalon",
-    "Cherokee",
-    "Model Y",
-    "Charger",
-    "Sonata",
-    "Tacoma",
-    "CX-5",
-    "Explorer",
-    "Camaro",
-    "Focus",
-  ];
-  const [modelOptions, setModelOptions] = useState(model);
+  const [modelOptions, setModelOptions] = useState([]);
 
   const [resetFuel, setResetFuel] = useState(() => {});
   const [selectedFuel, setSelectedFuel] = useState("\u00A0");
-  const fuel = ["\u00A0", "Gasoline", "Hybrid", "Electric"];
-  const [fuelOptions, setFuelOptions] = useState(fuel);
+  const [fuelOptions, setFuelOptions] = useState([]);
 
   const [minYear, setMinYear] = useState(0);
   const [maxYear, setMaxYear] = useState(0);
@@ -75,75 +33,78 @@ function SearchCar() {
 
   const [resetCategory, setResetCategory] = useState(() => {});
   const [selectedCategory, setSelectedCategory] = useState("\u00A0");
-  const category = ["\u00A0", "Sedan", "Compact", "Truck", "Sport", "SUV"];
-  const [categoryOptions, setCategoryOptions] = useState(category);
+  const [categoryOptions, setCategoryOptions] = useState([]);
 
   const [resetColor, setResetColor] = useState(() => {});
   const [selectedColor, setSelectedColor] = useState("\u00A0");
-  const color = ["\u00A0", "Red", "Green", "Yellow"];
-  const [colorOptions, setColorOptions] = useState(color);
+  const [colorOptions, setColorOptions] = useState([]);
 
   const [resetTransmission, setResetTransmission] = useState(() => {});
   const [selectedTransmission, setSelectedTransmission] = useState("\u00A0");
-  const transmission = ["\u00A0", "Automatic", "Manual"];
-  const [transmissionOptions, setTransmissionOptions] = useState(transmission);
+  const [transmissionOptions, setTransmissionOptions] = useState([]);
 
-  const [minRate, setMinRate] = useState(0);
-  const [maxRate, setMaxRate] = useState(0);
-
-  const [searchResult, setSearchResult] = useState([
-    // {
-    //   image:
-    //     "https://www.gtplanet.net/wp-content/uploads/2023/06/image-3-28.jpg",
-    //   make: "Toyota",
-    //   model: "Corolla",
-    //   fuel: "Gasoline",
-    //   year: 2023,
-    //   category: "Hatchback",
-    //   color: "Red",
-    //   transmission: "Manual",
-    //   rate: 20,
-    // },
-    // {
-    //   image:
-    //     "https://www.motortrend.com/uploads/sites/5/2020/01/2020-Honda-Civic-Type-R-front.jpg?fit=around%7C875:492",
-    //   make: "Honda",
-    //   model: "Civic",
-    //   fuel: "Gasoline",
-    //   year: 2022,
-    //   category: "Hatchback",
-    //   color: "White",
-    //   transmission: "Manual",
-    //   rate: 30,
-    // },
+  const [resetRate, setResetRate] = useState(() => {});
+  const [rateOptions, setRateOptions] = useState([
+    "\u00A0",
+    "High To Low",
+    "Low To High",
   ]);
+  const [selectedRate, setSelectedRate] = useState("\u00A0");
+
+  const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
-    //get options from server
+    // generate query for backend
+    let query = "";
+    if (selectedMake !== "\u00A0") {
+      query += "make=" + selectedMake + "&";
+    }
+    if (selectedModel !== "\u00A0") {
+      query += "model=" + selectedModel + "&";
+    }
+    if (selectedFuel !== "\u00A0") {
+      query += "fuel=" + selectedFuel + "&";
+    }
+    if (selectedCategory !== "\u00A0") {
+      query += "category=" + selectedCategory + "&";
+    }
+    if (selectedColor !== "\u00A0") {
+      query += "color=" + selectedColor + "&";
+    }
+    if (selectedTransmission !== "\u00A0") {
+      query += "transmission=" + selectedTransmission + "&";
+    }
+
+    if (minYear !== maxYear) {
+      query += "minYear=" + minYear + "&maxYear=" + maxYear + "&";
+    }
+
+    if (query !== "") {
+      query = "?" + query.slice(0, query.length - 1);
+    }
+    fetchData(query);
+
+    // update options
   }, [
     selectedMake,
     selectedModel,
     selectedFuel,
-    minYear,
-    maxYear,
+    minYear, //remove later
+    maxYear, //remove later
     selectedCategory,
     selectedColor,
     selectedTransmission,
-    minRate,
-    maxRate,
+    selectedRate,
   ]);
 
-  const handleReset = () => {
+  const handleReset = (setter) => {
     resetMake();
     resetModel();
     resetFuel();
-    setMinYear(0);
-    setMaxYear(0);
     resetCategory();
     resetColor();
     resetTransmission();
-    setMinRate(0);
-    setMaxRate(0);
+    setResetRate();
   };
 
   const handleInput = (setter) => {
@@ -155,8 +116,23 @@ function SearchCar() {
     };
   };
 
-  const fetchData = async () => {
-    const url = "localhost:3001/";
+  // const handleRange = (min, max, minSetter, maxSetter) => {
+  //   if (min > max) {
+  //     const temp = min;
+  //     minSetter(max);
+  //     maxSetter(temp);
+  //   }
+  // };
+
+  const fetchData = async (query) => {
+    const url = "http://localhost:3001/rent";
+    try {
+      const result = await axios.get(url + query);
+      console.log(result.data.cars);
+      setSearchResult(result.data.cars);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const selectAllValue = (e) => {
@@ -196,17 +172,19 @@ function SearchCar() {
                 }
               />
               {/* model */}
-              <AccordionItem
-                title={"model"}
-                content={
-                  <Filter
-                    options={modelOptions}
-                    setter={setSelectedModel}
-                    category={"model"}
-                    resetter={setResetModel}
-                  />
-                }
-              />
+              {selectedMake !== "\u00A0" && (
+                <AccordionItem
+                  title={"model"}
+                  content={
+                    <Filter
+                      options={modelOptions}
+                      setter={setSelectedModel}
+                      category={"model"}
+                      resetter={setResetModel}
+                    />
+                  }
+                />
+              )}
               {/* category */}
               <AccordionItem
                 title={"category"}
@@ -271,7 +249,7 @@ function SearchCar() {
                       value={minYear}
                       type="text"
                       className="bg-gray-50 border border-gray-300 text-xs text-gray-900  rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                      onInput={handleInput(setMinYear)}
+                      onInput={() => handleInput(setMinYear)}
                       onClick={selectAllValue}
                     />
                     <label
@@ -285,7 +263,7 @@ function SearchCar() {
                       value={maxYear}
                       type="text"
                       className="bg-gray-50 border border-gray-300 text-xs text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                      onInput={handleInput(setMaxYear)}
+                      onInput={() => handleInput(setMaxYear)}
                       onClick={selectAllValue}
                     />
                     <label
@@ -299,44 +277,14 @@ function SearchCar() {
               />
               {/* rate */}
               <AccordionItem
-                title={"price"}
+                title={"rate"}
                 content={
-                  <div className="flex items-center w-52 py-3">
-                    <label
-                      htmlFor="minRate"
-                      className="text-white mr-1 text-sm text-center"
-                    >
-                      Min ($)
-                    </label>
-                    <input
-                      htmlFor="minRate"
-                      value={minRate}
-                      type="text"
-                      className="bg-gray-50 border border-gray-300 text-sm text-gray-900  rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                      onInput={handleInput(setMinRate)}
-                      onClick={selectAllValue}
-                    />
-                    <label
-                      htmlFor="minRate"
-                      className="text-white m-1 text-sm text-center"
-                    >
-                      -
-                    </label>
-                    <input
-                      htmlFor="maxRate"
-                      value={maxRate}
-                      type="text"
-                      className="bg-gray-50 border border-gray-300 text-sm text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                      onInput={handleInput(setMaxRate)}
-                      onClick={selectAllValue}
-                    />
-                    <label
-                      htmlFor="maxRate"
-                      className="text-white ml-1 text-sm text-center"
-                    >
-                      Max ($)
-                    </label>
-                  </div>
+                  <Filter
+                    options={rateOptions}
+                    setter={setSelectedRate}
+                    category={"rate"}
+                    resetter={setResetTransmission}
+                  />
                 }
               />
               <div className="flex justify-center p-3">
@@ -354,7 +302,7 @@ function SearchCar() {
         <div className="flex flex-wrap justify-evenly p-5 w-full h-full border-4 rounded-xl border-white bg-green-900">
           {searchResult.length !== 0 ? (
             searchResult.map((car) => (
-              <div key={car.model} className="p-2">
+              <div key={car.plate_id} className="p-2">
                 <CarCard car={car} />
               </div>
             ))
