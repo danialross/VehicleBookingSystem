@@ -118,19 +118,6 @@ function SearchCar() {
     // },
   ]);
 
-  const handleReset = () => {
-    resetMake();
-    resetModel();
-    resetFuel();
-    setMinYear(0);
-    setMaxYear(0);
-    resetCategory();
-    resetColor();
-    resetTransmission();
-    setMinRate(0);
-    setMaxRate(0);
-  };
-
   useEffect(() => {
     //get options from server
   }, [
@@ -146,6 +133,19 @@ function SearchCar() {
     maxRate,
   ]);
 
+  const handleReset = () => {
+    resetMake();
+    resetModel();
+    resetFuel();
+    setMinYear(0);
+    setMaxYear(0);
+    resetCategory();
+    resetColor();
+    resetTransmission();
+    setMinRate(0);
+    setMaxRate(0);
+  };
+
   const handleInput = (setter) => {
     return (e) => {
       const value = e.target.value;
@@ -153,6 +153,10 @@ function SearchCar() {
         setter(value);
       }
     };
+  };
+
+  const fetchData = async () => {
+    const url = "localhost:3001/";
   };
 
   const selectAllValue = (e) => {
@@ -355,7 +359,7 @@ function SearchCar() {
               </div>
             ))
           ) : (
-            <div className=" flex flex-col text-white font-bebas items-center max-w-sm rounded-xl bg-green-700 ">
+            <div className=" flex flex-col text-white font-bebas items-center max-w-lg rounded-xl bg-green-700 ">
               <img src={mysteryCar} alt="missing car" />
 
               <div className="text-4xl pb-10 -mt-8 ">No Results Found</div>
