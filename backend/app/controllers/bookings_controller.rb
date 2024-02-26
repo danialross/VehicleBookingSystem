@@ -21,8 +21,6 @@ class BookingsController < ApplicationController
   @cars = @cars.where(category:params[:category]) if params[:category].present?
   @cars = @cars.where(color:params[:color]) if params[:color].present?
   @cars = @cars.where(transmission:params[:transmission]) if params[:transmission].present?
-  @cars = @cars.where(make:params[:make]) if params[:make].present?
-
 
   if params[:minYear].present? && params[:maxYear].present? && params[:minYear] != params[:maxYear]
     @cars = @cars.where(year: params[:minYear]..params[:maxYear])
@@ -53,5 +51,22 @@ class BookingsController < ApplicationController
     @images = images_query.all
 
     render json: @images
+  end
+
+  def getOptions
+    @cars = Car.all
+    @cars = @cars.where(make:params[:make]) if params[:make].present?
+    @cars = @cars.where(fuel:params[:fuel]) if params[:fuel].present?
+    @cars = @cars.where(category:params[:category]) if params[:category].present?
+    @cars = @cars.where(color:params[:color]) if params[:color].present?
+    @cars = @cars.where(transmission:params[:transmission]) if params[:transmission].present?
+
+    make = @cars.distinct.pluck(:make)
+    fuel = @cars.distinct.pluck(:fuel)
+    category = @cars.distinct.pluck(:category)
+    color = @cars.distinct.pluck(:color)
+    transmission = @cars.distinct.pluck(:transmission)
+
+    render json:{make:make,fuel:fuel,category:category,color:color,transmission:transmission}
   end
 end
