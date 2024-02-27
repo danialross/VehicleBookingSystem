@@ -57,7 +57,7 @@ function CarCard({ car }) {
       console.error(err);
     }
 
-    navigate("/bookings");
+    navigate("/bookings?license_id=" + licenseNumber);
   };
 
   return (

@@ -1,65 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import BookingCard from "./BookingCard";
+import { useLocation } from "react-router-dom";
+
 function SearchBooking() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
   const url = "http://localhost:3001/bookings";
   const [search, setSearch] = useState("");
   //booking init to null
   const [bookings, setBookings] = useState(null);
-  // {
-  //   rentals: {
-  //     id: "1",
-  //     license: "DL012345",
-  //     plate: "ABC123",
-  //     start: "2023-08-01 08:00:00",
-  //     end: "2023-08-05 18:00:00",
-  //   },
-  //   cars: {
-  //     plate: "ABC123",
-  //     make: "Toyota",
-  //     model: "Camry",
-  //     fuel: "Gasoline",
-  //     year: "2022",
-  //     category: "Sedan",
-  //     mileage: "15000",
-  //     color: "green",
-  //     transmission: "Automatic",
-  //     rate: "30",
-  //   },
-  //   gallery: {
-  //     make: "Toyota",
-  //     model: "Camry",
-  //     image:
-  //       "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/2018-Chevrolet-Camaro-ZL1-1LE-001-01.jpg/800px-2018-Chevrolet-Camaro-ZL1-1LE-001-01.jpg",
-  //   },
-  // },
-  // {
-  //   rentals: {
-  //     id: "2",
-  //     license: "DL112223",
-  //     plate: "ABC456",
-  //     start: "2023-08-10 12:30:00",
-  //     end: "2023-08-15 15:45:00",
-  //   },
-  //   cars: {
-  //     plate: "ABC456",
-  //     make: "Honda",
-  //     model: "Civic",
-  //     fuel: "Hybrid",
-  //     year: "2023",
-  //     category: "Compact",
-  //     mileage: "9000",
-  //     color: "Green",
-  //     transmission: "CVT",
-  //     rate: "20",
-  //   },
-  //   gallery: {
-  //     make: "Honda",
-  //     model: "Civic",
-  //     image:
-  //       "https://media.ed.edmunds-media.com/honda/civic/2023/oem/2023_honda_civic_sedan_si_fq_oem_1_1280.jpg",
-  //   },
-  // },
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -77,6 +28,12 @@ function SearchBooking() {
       //something went wrong
     }
   };
+
+  useEffect(() => {
+    if (location.search !== "") {
+      setSearch(queryParams.get("license_id"));
+    }
+  }, []);
 
   return (
     <div className="w-full h-full pt-16 pb-24">
