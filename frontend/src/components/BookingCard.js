@@ -42,12 +42,8 @@ function BookingCard({ booking }) {
             {isDetailsOpened ? "Less" : "Details"}
           </button>
         </div>
-        <div className="text-xl">
-          Pick Up : {new Date(booking.start_date).toLocaleString()}
-        </div>
-        <div className="text-xl">
-          Drop Off : {new Date(booking.end_date).toLocaleString()}
-        </div>
+
+        <div className="text-xl">Booking Name : {booking.name}</div>
       </div>
     </div>
   );

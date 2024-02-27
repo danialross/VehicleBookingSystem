@@ -4,8 +4,9 @@ class BookingsController < ApplicationController
     license_id = params[:license_id]
     rentals_with_cars_and_images = Rental.joins(:car)
                                       .joins("INNER JOIN images ON cars.make = images.make AND cars.model = images.model")
+                                      .joins("INNER JOIN customers ON rentals.license_id = customers.license_id")
                                       .where(license_id: license_id)
-                                      .select('rentals.*, cars.*, images.image')
+                                      .select('rentals.*, cars.*,customers.name, images.image')
 
 
     render json: {bookings:rentals_with_cars_and_images}
