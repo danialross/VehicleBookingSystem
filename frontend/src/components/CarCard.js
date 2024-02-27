@@ -276,6 +276,48 @@ function CarCard({ car }) {
                             </label>
                           </div>
                         </div>
+                        <div>
+                          <label
+                            htmlFor="car"
+                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >
+                            Car
+                          </label>
+                          <div className="flex flex-col border border-gray-600 rounded-lg p-4 gap-2">
+                            <label
+                              htmlFor="car"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              {car.year + " " + car.make + " " + car.model}
+                            </label>
+
+                            <label
+                              htmlFor="car"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Fuel : {car.fuel}
+                            </label>
+
+                            <label
+                              htmlFor="car"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Category : {car.category}
+                            </label>
+                            <label
+                              htmlFor="car"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Transmission : {car.transmission}
+                            </label>
+                            <label
+                              htmlFor="car"
+                              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                              Color : {car.color}
+                            </label>
+                          </div>
+                        </div>
                       </div>
 
                       <div className="w-full flex justify-end">
