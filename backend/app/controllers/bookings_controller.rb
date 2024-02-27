@@ -23,13 +23,15 @@ class BookingsController < ApplicationController
   @cars = @cars.where(transmission:params[:transmission]) if params[:transmission].present?
   @cars = @cars.where(year:params[:year]) if params[:year].present?
 
-  if params[:minYear].present? && params[:maxYear].present? && params[:minYear] != params[:maxYear]
-    @cars = @cars.where(year: params[:minYear]..params[:maxYear])
+  if(params[:order].present?)
+    if(params[:order] == "asc")
+      @cars = @cars.order(:rate)
+    elsif(params[:order] == "desc")
+      @cars = @cars.order(rate: :desc)
+    end
   end
 
-  if params[:minRate].present? && params[:maxRate].present? && params[:minRate] != params[:maxRate]
-    @cars = @cars.where(rate: params[:minRate]..params[:maxRate])
-  end
+
 
   @cars = @cars.joins("INNER JOIN images ON cars.make = images.make AND cars.model = images.model")
     .select("cars.*,images.image")

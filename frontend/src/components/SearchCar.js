@@ -94,6 +94,12 @@ function SearchCar() {
       query += "year=" + selectedYear + "&";
     }
 
+    if (selectedRate === "High To Low") {
+      query += "order=desc&";
+    } else if (selectedRate === "Low To High") {
+      query += "order=asc&";
+    }
+
     if (query !== "") {
       query = "?" + query.slice(0, query.length - 1);
     }
@@ -238,7 +244,7 @@ function SearchCar() {
                     options={rateOptions}
                     setter={setSelectedRate}
                     category={"rate"}
-                    resetter={setResetTransmission}
+                    resetter={setResetRate}
                   />
                 }
               />
