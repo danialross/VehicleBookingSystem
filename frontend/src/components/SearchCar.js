@@ -119,15 +119,27 @@ function SearchCar() {
     selectedYear,
   ]);
 
+  //reset option
   const handleReset = (setter) => {
     resetMake();
-    resetModel();
+    setSelectedMake("\u00A0");
+
+    if (selectedMake !== "\u00A0") {
+      resetModel();
+      setSelectedModel("\u00A0");
+    }
     resetFuel();
+    setSelectedFuel("\u00A0");
     resetCategory();
+    setSelectedCategory("\u00A0");
     resetYear();
+    setSelectedYear("\u00A0");
     resetColor();
+    setSelectedColor("\u00A0");
     resetTransmission();
+    setSelectedTransmission("\u00A0");
     resetRate();
+    setSelectedRate("\u00A0");
   };
 
   const fetchCars = async (query) => {
