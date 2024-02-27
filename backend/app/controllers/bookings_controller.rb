@@ -84,7 +84,34 @@ class BookingsController < ApplicationController
     transmission.unshift("\u00A0");
     year.unshift("\u00A0");
 
-
     render json:{make:make,model:model,fuel:fuel,category:category,color:color,transmission:transmission,year:year}
   end
+
+  def bookRental
+    raw_data = request.body.read
+    jsonData = JSON.parse(raw_data)
+
+    customer = Customer.new
+    customer.attributes = { license_id: jsonData["license_id"],name:jsonData["name"],age:jsonData["age"],gender:jsonData["gender"],contact_info:jsonData["contact_info"]}
+    rental = Rental.new
+    rental.attributes = { license_id: jsonData["license_id"], plate_id: jsonData["plate_id"] }
+
+    puts rental
+    puts customer
+
+    # customer = Customer.create( license_id: jsonData["license_id"],name:jsonData["name"],age:jsonData["age"],gender:jsonData["gender"],contact_info:jsonData["contact_info"])
+    # rental = Rental.create( license_id: jsonData.license_id, plate_id: jsonData.plate_id )
+
+
+    # if customer.persisted? && rental.persisted?
+    #   puts "Records Successfully Added"
+    # else
+    #   puts "Error Saving Records"
+    # end
+
+    # customer.save
+    # rental.save
+
+  end
+
 end
