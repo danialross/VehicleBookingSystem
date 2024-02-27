@@ -18,7 +18,12 @@ function Category() {
       phrase: "Green Power\n Pure Performance",
       category: "Electric Cars",
     },
-    { image: truck, phrase: "Master of All Terrains", category: "Trucks" },
+    {
+      image: truck,
+      phrase: "Master of All Terrains",
+      category: "Trucks",
+      link: "/rent?category=Truck",
+    },
     {
       image: sport,
       phrase: "Engineered for Excitement",
@@ -82,12 +87,6 @@ function Category() {
                     fill="currentFill"
                   />
                 </svg>
-                <button
-                  type="button"
-                  className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                >
-                  {`Browse ${section.category}`}
-                </button>
               </div>
             );
           })}
