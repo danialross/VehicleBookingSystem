@@ -6,6 +6,7 @@ import mysteryCar from "../assets/mysteryCar.png";
 import axios from "axios";
 
 function SearchCar() {
+  const url = "http://localhost:3001/rent";
   //model
   //make
   //fuel
@@ -27,9 +28,9 @@ function SearchCar() {
   const [selectedFuel, setSelectedFuel] = useState("\u00A0");
   const [fuelOptions, setFuelOptions] = useState([]);
 
-  const [minYear, setMinYear] = useState(0);
-  const [maxYear, setMaxYear] = useState(0);
-  const [onYearFocus, setOnYearFocus] = useState(false);
+  const [resetYear, setResetYear] = useState(() => {});
+  const [selectedYear, setSelectedYear] = useState("\u00A0");
+  const [yearOptions, setYearOptions] = useState([]);
 
   const [resetCategory, setResetCategory] = useState(() => {});
   const [selectedCategory, setSelectedCategory] = useState("\u00A0");
@@ -50,10 +51,24 @@ function SearchCar() {
     "Low To High",
   ]);
   const [selectedRate, setSelectedRate] = useState("\u00A0");
-
   const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
+    const fetchOptions = async (query) => {
+      try {
+        const result = await axios.get(url + "/options" + query);
+        setMakeOptions(result.data.make);
+        setModelOptions(result.data.model);
+        setFuelOptions(result.data.fuel);
+        setCategoryOptions(result.data.category);
+        setColorOptions(result.data.color);
+        setTransmissionOptions(result.data.transmission);
+        setYearOptions(result.data.year);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
     // generate query for backend
     let query = "";
     if (selectedMake !== "\u00A0") {
@@ -75,26 +90,27 @@ function SearchCar() {
       query += "transmission=" + selectedTransmission + "&";
     }
 
-    if (minYear !== maxYear) {
-      query += "minYear=" + minYear + "&maxYear=" + maxYear + "&";
+    if (selectedYear !== "\u00A0") {
+      query += "year=" + selectedYear + "&";
     }
 
     if (query !== "") {
       query = "?" + query.slice(0, query.length - 1);
     }
-    fetchData(query);
+    console.log(query);
+    fetchCars(query);
 
     // update options
+    fetchOptions(query);
   }, [
     selectedMake,
     selectedModel,
     selectedFuel,
-    minYear, //remove later
-    maxYear, //remove later
     selectedCategory,
     selectedColor,
     selectedTransmission,
     selectedRate,
+    selectedYear,
   ]);
 
   const handleReset = (setter) => {
@@ -102,50 +118,19 @@ function SearchCar() {
     resetModel();
     resetFuel();
     resetCategory();
+    resetYear();
     resetColor();
     resetTransmission();
-    setResetRate();
+    resetRate();
   };
 
-  const handleInput = (setter) => {
-    return (e) => {
-      const value = e.target.value;
-      if (/^\d*$/.test(value)) {
-        setter(value);
-      }
-    };
-  };
-
-  // const handleRange = (min, max, minSetter, maxSetter) => {
-  //   if (min > max) {
-  //     const temp = min;
-  //     minSetter(max);
-  //     maxSetter(temp);
-  //   }
-  // };
-
-  const fetchData = async (query) => {
-    const url = "http://localhost:3001/rent";
+  const fetchCars = async (query) => {
     try {
-      const result = await axios.get(url + query);
+      const result = await axios.get(url + "/cars/" + query);
       console.log(result.data.cars);
       setSearchResult(result.data.cars);
     } catch (err) {
       console.error(err);
-    }
-  };
-
-  const selectAllValue = (e) => {
-    setOnYearFocus(true);
-    const element = e.target;
-    const value = element.value;
-
-    const isAllSelected =
-      element.selectionStart === 0 && element.selectionEnd === value.length;
-    console.log(isAllSelected);
-
-    if (!onYearFocus) {
-      element.select();
     }
   };
 
@@ -237,42 +222,12 @@ function SearchCar() {
               <AccordionItem
                 title={"year"}
                 content={
-                  <div className="flex items-center w-52 py-3">
-                    <label
-                      htmlFor="minRate"
-                      className="text-white mr-1 text-xs text-center"
-                    >
-                      Min (Year)
-                    </label>
-                    <input
-                      htmlFor="minYear"
-                      value={minYear}
-                      type="text"
-                      className="bg-gray-50 border border-gray-300 text-xs text-gray-900  rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                      onInput={() => handleInput(setMinYear)}
-                      onClick={selectAllValue}
-                    />
-                    <label
-                      htmlFor="minYear"
-                      className="text-white m-1 text-sm text-center"
-                    >
-                      -
-                    </label>
-                    <input
-                      htmlFor="maxYear"
-                      value={maxYear}
-                      type="text"
-                      className="bg-gray-50 border border-gray-300 text-xs text-gray-900 rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                      onInput={() => handleInput(setMaxYear)}
-                      onClick={selectAllValue}
-                    />
-                    <label
-                      htmlFor="maxYear"
-                      className="text-white ml-1 text-xs text-center"
-                    >
-                      Max (Year)
-                    </label>
-                  </div>
+                  <Filter
+                    options={yearOptions}
+                    setter={setSelectedYear}
+                    category={"year"}
+                    resetter={setResetYear}
+                  />
                 }
               />
               {/* rate */}
