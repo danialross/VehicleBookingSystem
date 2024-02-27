@@ -88,30 +88,22 @@ class BookingsController < ApplicationController
   end
 
   def bookRental
-    raw_data = request.body.read
-    jsonData = JSON.parse(raw_data)
+    jsonData = JSON.parse(request.body.read)
 
-    customer = Customer.new
-    customer.attributes = { license_id: jsonData["license_id"],name:jsonData["name"],age:jsonData["age"],gender:jsonData["gender"],contact_info:jsonData["contact_info"]}
-    rental = Rental.new
-    rental.attributes = { license_id: jsonData["license_id"], plate_id: jsonData["plate_id"] }
+    customer = Customer.find_or_create_by(license_id: jsonData["license_id"]) do |c|
+      c.name = jsonData["name"]
+      c.age = jsonData["age"]
+      c.gender = jsonData["gender"]
+      c.contact_info = jsonData["contact_info"]
+    end
 
-    puts rental
-    puts customer
+    didAddRental = Rental.create(plate_id: jsonData["plate_id"], license_id: customer.license_id)
 
-    # customer = Customer.create( license_id: jsonData["license_id"],name:jsonData["name"],age:jsonData["age"],gender:jsonData["gender"],contact_info:jsonData["contact_info"])
-    # rental = Rental.create( license_id: jsonData.license_id, plate_id: jsonData.plate_id )
-
-
-    # if customer.persisted? && rental.persisted?
-    #   puts "Records Successfully Added"
-    # else
-    #   puts "Error Saving Records"
-    # end
-
-    # customer.save
-    # rental.save
-
+    if didAddRental.persisted?
+      puts "Rental record successfully added."
+    else
+      puts "Error saving rental record: #{didAddRental.errors.full_messages.join(", ")}"
+    end
   end
 
 end
